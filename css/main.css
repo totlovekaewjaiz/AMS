@@ -1,0 +1,233 @@
+body{
+	background-color:#000000;
+	top:0px;
+	left:0px;
+	min-width:1024px;
+	font-family:Arial;
+	font-size: 12px; 
+}
+
+#content {
+	position:absolute;
+	top:0px;
+	left:0px;
+	min-width:1024px;
+	min-height:600px;
+	padding:0px;
+	margin:0px;
+	width:100%;
+	height:100%;
+	
+}
+
+#screen  { 
+	position: absolute;  
+	left: 0;  
+	top: 0;  
+	background: #000;  
+	z-index: 150;
+} 
+
+#main_tools {
+	position:absolute;
+	top:30px;
+	left:0px;
+	right:0px;
+	z-index:20;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#AdminUsername {
+	position:absolute;
+	top:20px;
+	right:220px;
+	font-weight:bold;
+	color:blue;
+	cursor:pointer;
+	float:left;
+	color:white;
+}
+
+
+#AdminClock {
+	position:absolute;
+	top:20px;
+	right:50px;
+	font-weight:bold;
+	color:white;
+}
+
+.logo {
+	width:300px;
+	height:100px;
+	position:absolute;
+	top:0px;
+	left:20px;
+	z-index:-1;
+}
+.logout {
+	width:32px;
+	height:32px;
+	cursor:pointer;
+	position:absolute;
+	top:10px;
+	right:180px;
+}
+
+.title {
+	font-weight:bold;
+	text-align:center;
+	padding:3px;
+}
+
+.footer {
+	position:absolute;
+	bottom:10px;
+	left:0px;
+	right:0px;
+	z-index:10;
+	margin-left: auto ;
+	margin-right: auto ;
+	font-weight:bold;
+	text-align:center;
+}
+
+.LogoutPopupContent{
+	padding-top:20px;
+	padding-left:30px;
+	padding-bottom:10px;
+	font-weight:bold;
+}
+
+.LogoutPopupContent .button{	
+	width:100px;
+	margin-top:10px;
+	margin-left:10px;	
+	font-size:10px;
+}
+
+.LoadingPopupContent{
+	padding-top:30px;
+	padding-bottom:10px;
+	text-align:center;
+	color:#777777;
+	font-weight:bold;
+}
+
+.LoadingPopupContent .button{	
+	width:100px;
+	margin-top:10px;
+	margin-left:10px;	
+	font-size:10px;
+}
+
+
+.left_menu {
+	width:20%;
+	height:80%;
+	float:left;
+	padding:10px;
+	margin:10px;
+	margin-top:80px;
+	margin-left:20px;
+	background-color:#FFFFFF;
+	border:solid 1px;
+}
+
+
+.left_menu .menu {	
+	width:100%;
+	height:30px;
+	cursor:pointer;	
+	background-color:#AAAAAA;
+	margin:2px;
+}
+
+.left_menu .menu:hover {	
+	background-color:#EEEEEE;	
+}
+
+.MenuLabel {	
+	padding:5px;
+	padding-left:20px;
+	font-weight:bold;
+}
+
+
+.left_menu .menu .icon_border {
+	width:80px;
+}
+
+.left_menu .menu .icon {
+	width:60px;
+	height:60px;	
+	margin:10px;
+}
+
+.left_menu .menu .menu_name {
+	font-weight:bold;
+	font-size:10px;
+	text-align:center;
+}
+
+.right_menu {
+	width:70%;
+	height:80%;
+	float:left;
+	padding:10px;
+	margin:10px;
+	margin-top:80px;
+	background-color:#FFFFFF;
+	border:solid 1px;
+	overflow:auto;
+}
+
+.dataContent {
+	width:100%;
+	height:100%;
+}
+.dataContent table{
+	font-family:Arial;
+	font-size: 12px; 
+}
+
+.dataContent td{
+	width:300px;
+}
+
+.statusData {
+	border-collapse:collapse;
+	border:solid 1px;
+	width:100%;
+}
+
+.statusData th {
+	background-color:#CCCCCC;
+	border:solid 1px;
+	font-family:arial;
+	font-size:10px;
+}
+.statusData td {
+	border:solid 1px;
+	font-family:arial;
+	font-size:10px;
+	padding-left:3px;
+	padding-right:3px;
+}
+
+.statusData a {
+	text-decoration:none;
+}
+
+.statusData img {
+	width:12px;
+	height:12px;
+}
+
+.infoData {
+	width:100%;
+	height:340px;
+	overflow:auto;
+}
+
