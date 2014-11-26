@@ -7,7 +7,6 @@
 	if($action == "changePage") {
 		$MaterialID = $_POST["MaterialID"];
 		$MaterialInfo = new Material( $MaterialID , $db );
-		
 		include("../tools/material_spec_info.php");
 	}
 	
