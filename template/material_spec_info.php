@@ -1,4 +1,4 @@
-<style>
+﻿<style>
 textarea {
     resize: none;
 }
@@ -44,12 +44,12 @@ textarea {
 	
 	function cancel() {
 		showLoadingPopup();
-		loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 	}
 	
 	function save() {
 		showLoadingPopup();
-		loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 	}
 	
 
@@ -58,14 +58,14 @@ textarea {
 <div class = "ConfigContent" style = "padding:10px;">
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "Save" >
-	<input type = "hidden" id = "id" name = "id" value = "<?  ?>" >	
+	<input type = "hidden" id = "id" name = "id" value = "<?php  ?>" >	
 	
 	<div>ชื่อวัสดุ</div>
-	<div><input type = "text" id = "MaterialName" name = "MaterialName" value = "<?   ?>"  style = "width:200px;" class = "ui-corner-all"></div>			
+	<div><input type = "text" id = "MaterialName" name = "MaterialName" value = "<?php   ?>"  style = "width:200px;" class = "ui-corner-all"></div>			
 	<div>กว้าง</div>
-	<div><input type = "text" id = "MaterialWidth" name = "MaterialWidth" value = "<?  ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
+	<div><input type = "text" id = "MaterialWidth" name = "MaterialWidth" value = "<?php  ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
 	<div>ยาว</div>
-	<div><input type = "text" id = "MaterialHeight" name = "MaterialHeight" value = "<?  ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
+	<div><input type = "text" id = "MaterialHeight" name = "MaterialHeight" value = "<?php  ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
 	
 	
 	<div>

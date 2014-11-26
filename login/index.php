@@ -81,14 +81,14 @@
 </div>
 </div>
 
-<?
+<?php
 	if(!empty($Message)) {
 		?>		
 		<div id = "errorPopup" class="ui-widget-content ui-corner-all">
 		<div class="ui-widget-header title">Login Failed</div>
 		<div class = "ErrorPopupContent">
 		<div style = "height:80px;" id = "MessageContent">
-		<?
+		<?php
 			echo $Message;
 		?>
 		</div>
@@ -96,7 +96,7 @@
 		</div>
 		</div>
 		<script>blockScreen();$("#errorPopup").show();</script>
-		<?
+		<?php
 	} else {
 		?>
 		
@@ -108,7 +108,7 @@
 		</div>
 		</div>
 		</div>
-		<?
+		<?php
 	}
 ?>
 

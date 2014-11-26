@@ -50,7 +50,7 @@ textarea {
 	
 	function cancel() {
 		showLoadingPopup();
-		loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 	}
 	
 	function save() {
@@ -59,7 +59,7 @@ textarea {
 			$('#form').serialize()
 		, 
 		function(data){
-			loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+			loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 		});
 	}
 	
@@ -70,7 +70,7 @@ textarea {
 			$('#form').serialize()
 		, 
 		function(data){
-			loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+			loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 		});
 	}
 	
@@ -89,25 +89,25 @@ textarea {
 <div class = "ConfigContent" style = "padding:10px;">
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "Save" >
-	<input type = "hidden" id = "id" name = "id" value = "<? echo $ProjectID; ?>" >	
+	<input type = "hidden" id = "id" name = "id" value = "<?php echo $ProjectID; ?>" >	
 	
 	<div>Project name</div>
-	<div><input type = "text" id = "ProjectName" name = "ProjectName" value = "<? echo $ProjectInfo->ProjectName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
+	<div><input type = "text" id = "ProjectName" name = "ProjectName" value = "<?php echo $ProjectInfo->ProjectName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
 	<div>Project Description</div>
 	<div>
-	<textarea id = "ProjectDescription" name = "ProjectDescription"  style = "width:200px;height:120px;" class = "ui-corner-all" resizeable ><? echo $ProjectInfo->ProjectDescription; ?></textarea>
+	<textarea id = "ProjectDescription" name = "ProjectDescription"  style = "width:200px;height:120px;" class = "ui-corner-all" resizeable ><?php echo $ProjectInfo->ProjectDescription; ?></textarea>
 	</div>
 	<div>Start Date</div>
-	<div><input type = "text" id = "Start" name = "Start" value = "<? echo $ProjectInfo->Start; ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
+	<div><input type = "text" id = "Start" name = "Start" value = "<?php echo $ProjectInfo->Start; ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
 	<div>End Date</div>
-	<div><input type = "text" id = "End" name = "End" value = "<? echo $ProjectInfo->End; ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
+	<div><input type = "text" id = "End" name = "End" value = "<?php echo $ProjectInfo->End; ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
 	<div>
 	<input type = "button" value = "Save" class = "button" onclick = "save()">
-	<?
+	<?php
 		if(!empty($ProjectID)) {
 			?>
 			<input type = "button" value = "Delete"  class = "button" onclick = "drop()">
-			<?
+			<?php
 		}
 	?>
 	<input type = "button" value = "Cancel"  class = "button" onclick = "cancel()">

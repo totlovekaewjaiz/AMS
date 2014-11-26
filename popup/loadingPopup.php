@@ -1,7 +1,7 @@
 <div class="ui-widget-header title">Loading</div>
 <div class = "LoadingPopupContent">
 <div style = "height:40px;">
-<?
+<?php
 	echo $Message;
 ?>
 </div>

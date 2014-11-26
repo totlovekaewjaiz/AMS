@@ -48,7 +48,7 @@ textarea {
 	
 	function cancel() {
 		showLoadingPopup();
-		loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 	}
 	
 	function save() {
@@ -59,7 +59,7 @@ textarea {
 		, 
 		function(data){
 			$("#imageResult").html(data);
-			loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+			loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 		});
 	}
 	
@@ -115,7 +115,7 @@ textarea {
 	
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "getImageInfo" >
-	<input type = "hidden" id = "id" name = "id" value = "<? echo $JobID; ?>" >	
+	<input type = "hidden" id = "id" name = "id" value = "<?php echo $JobID; ?>" >	
 	<input type = "hidden" id = "JobType" name = "JobType" value = "1" >	
 	
 	<div style = "width:30%;height:auto;float:left;">
@@ -123,18 +123,18 @@ textarea {
 	<div>
 	<select id = "ProjectID" name = "ProjectID" class = "ui-corner-all" style = "width:200px;" onchange = "LoadProjectMaterial( this.value , '')">
 	<option value = "">Select Project</option>
-	<?
+	<?php
 		for($i =0;$i < count($ProjectArray);$i++) {
 			?>
-			<option value = "<? echo $ProjectArray[$i]->id;?>"><? echo $ProjectArray[$i]->ProjectName;?></option>
-			<?
+			<option value = "<?php echo $ProjectArray[$i]->id;?>"><?php echo $ProjectArray[$i]->ProjectName;?></option>
+			<?php
 		}
 	?>
 	</select>
 	</div>
 	
 	<div>Job name</div>
-	<div><input type = "text" id = "JobName" name = "JobName" value = "<? echo $JobInfo->JobName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
+	<div><input type = "text" id = "JobName" name = "JobName" value = "<?php echo $JobInfo->JobName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
 	
 	<div>Width</div>
 	<div><input type = "text" id = "Width" name = "Width" value = " "  style = "width:200px;" class = "ui-corner-all"  ></div>		
@@ -152,12 +152,12 @@ textarea {
 	<div>
 	<select id = "Material" name = "Material" class = "ui-corner-all" style = "width:200px;">
 	<option value = "">Select Material</option>
-	<?	
+	<?php	
 		$AllData = $Loader->loadAllMaterial();
 		for($i =0;$i < count($AllData); $i++) {
 			?>
-			<option value  = "<? echo $AllData[$i]->id ?>" ><? echo $AllData[$i]->MaterialName ?></option>
-			<?
+			<option value  = "<?php echo $AllData[$i]->id ?>" ><?php echo $AllData[$i]->MaterialName ?></option>
+			<?php
 		}
 	?>
 	</select>
@@ -190,15 +190,15 @@ textarea {
 <script>
 	$(function() {	
 		$( "input[type=button],input[type=submit], a, button" ).button();
-		<?
+		<?php
 			if(!empty($JobInfo->ProjectID)) {
 				?>
-				$("#ProjectID").val("<? echo $JobInfo->ProjectID; ?>");
-				<?
+				$("#ProjectID").val("<?php echo $JobInfo->ProjectID; ?>");
+				<?php
 				if(!empty($JobInfo->FloorJobList["Material"])) {
 					?>
-					LoadProjectMaterial( "<? echo $JobInfo->ProjectID; ?>" , "<? echo $JobInfo->FloorJobList["Material"]; ?>");
-					<?
+					LoadProjectMaterial( "<?php echo $JobInfo->ProjectID; ?>" , "<?php echo $JobInfo->FloorJobList["Material"]; ?>");
+					<?php
 				}
 			}
 		?>		

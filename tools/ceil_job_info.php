@@ -48,7 +48,7 @@ textarea {
 	
 	function cancel() {
 		showLoadingPopup();
-		loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 	}
 	
 	function save() {
@@ -59,7 +59,7 @@ textarea {
 		, 
 		function(data){
 			$("#imageResult").html(data);
-			loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+			loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 		});
 	}
 	
@@ -115,7 +115,7 @@ textarea {
 	
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "getImageInfo" >
-	<input type = "hidden" id = "id" name = "id" value = "<? echo $JobID; ?>" >	
+	<input type = "hidden" id = "id" name = "id" value = "<?php echo $JobID; ?>" >	
 	<input type = "hidden" id = "JobType" name = "JobType" value = "3" >	
 	
 	<div style = "width:30%;height:auto;float:left;">
@@ -123,30 +123,30 @@ textarea {
 	<div>
 	<select id = "ProjectID" name = "ProjectID" class = "ui-corner-all" style = "width:200px;" onchange = "LoadProjectMaterial( this.value , '')">
 	<option value = "">Select Project</option>
-	<?
+	<?php
 		for($i =0;$i < count($ProjectArray);$i++) {
 			?>
-			<option value = "<? echo $ProjectArray[$i]->id;?>"><? echo $ProjectArray[$i]->ProjectName;?></option>
-			<?
+			<option value = "<?php echo $ProjectArray[$i]->id;?>"><?php echo $ProjectArray[$i]->ProjectName;?></option>
+			<?php
 		}
 	?>
 	</select>
 	</div>
 	
 	<div>Job name</div>
-	<div><input type = "text" id = "JobName" name = "JobName" value = "<? echo $JobInfo->JobName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
+	<div><input type = "text" id = "JobName" name = "JobName" value = "<?php echo $JobInfo->JobName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
 	
 	<div>Width</div>
-	<div><input type = "text" id = "Width" name = "Width" value = "<? echo $JobInfo->FloorJobList["Width"]; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>		
+	<div><input type = "text" id = "Width" name = "Width" value = "<?php echo $JobInfo->FloorJobList["Width"]; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>		
 	
 	<div>Long</div>
-	<div><input type = "text" id = "Long" name = "Long" value = "<? echo $JobInfo->FloorJobList["Long"]; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>
+	<div><input type = "text" id = "Long" name = "Long" value = "<?php echo $JobInfo->FloorJobList["Long"]; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>
 	
 	<div>Start Point X</div>
-	<div><input type = "text" id = "StartX" name = "StartX" value = "<? echo $JobInfo->FloorJobList["StartX"]; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>	
+	<div><input type = "text" id = "StartX" name = "StartX" value = "<?php echo $JobInfo->FloorJobList["StartX"]; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>	
 	
 	<div>Start Point Y</div>
-	<div><input type = "text" id = "StartY" name = "StartY" value = "<? echo $JobInfo->FloorJobList["StartY"]; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>	
+	<div><input type = "text" id = "StartY" name = "StartY" value = "<?php echo $JobInfo->FloorJobList["StartY"]; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>	
 	
 	<div>Material</div>
 	<div>
@@ -156,21 +156,21 @@ textarea {
 	</div>
 	
 	<div>ObjectWall</div>
-	<div><input type = "text" id = "ObjectWall" name = "ObjectWall" value = "<? echo $JobInfo->FloorJobList["ObjectWall"]; ?>"  style = "width:200px;" class = "ui-corner-all" onblur = "loadObjectDetailInfo()"></div>	
+	<div><input type = "text" id = "ObjectWall" name = "ObjectWall" value = "<?php echo $JobInfo->FloorJobList["ObjectWall"]; ?>"  style = "width:200px;" class = "ui-corner-all" onblur = "loadObjectDetailInfo()"></div>	
 	
 	<div id = "ObjectDetail">
-	<?
+	<?php
 		for($i =0;$i < $JobInfo->FloorJobList["ObjectWall"] ;$i++) {
 			?>
 			<div>Object Width</div>
-			<div><input type = "text" name = "ObjectWidth[]" value = "<? echo $JobInfo->FloorJobList["ObjectWidth"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all" ></div>		
+			<div><input type = "text" name = "ObjectWidth[]" value = "<?php echo $JobInfo->FloorJobList["ObjectWidth"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all" ></div>		
 			<div>Object Long</div>
-			<div><input type = "text" name = "ObjectLong[]" value = "<? echo $JobInfo->FloorJobList["ObjectLong"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all" ></div>
+			<div><input type = "text" name = "ObjectLong[]" value = "<?php echo $JobInfo->FloorJobList["ObjectLong"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all" ></div>
 			<div>Object Location X</div>
-			<div><input type = "text" name = "ObjectX[]" value = "<? echo $JobInfo->FloorJobList["ObjectX"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all" ></div>
+			<div><input type = "text" name = "ObjectX[]" value = "<?php echo $JobInfo->FloorJobList["ObjectX"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all" ></div>
 			<div>Object Location Y</div>
-			<div><input type = "text" name = "ObjectY[]" value = "<? echo $JobInfo->FloorJobList["ObjectY"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all" ></div>
-			<?
+			<div><input type = "text" name = "ObjectY[]" value = "<?php echo $JobInfo->FloorJobList["ObjectY"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all" ></div>
+			<?php
 		}
 	?>
 	</div>
@@ -179,13 +179,13 @@ textarea {
 	</div>
 	<div style = "width:70%;height:500px;float:left;overflow:auto;">
 	<div id = "imageResult">
-	<?
+	<?php
 		if(!empty($JobInfo->JobName)) {		
 			?>
-			<div><img src = '../resource/image/<? echo $JobInfo->JobName.".png?".rand(0,32000); ?>' /></div>
+			<div><img src = '../resource/image/<?php echo $JobInfo->JobName.".png?".rand(0,32000); ?>' /></div>
 			<input type = "hidden" name = "MaterialAmount" value = "">
-			<div>Total material = <? echo $JobInfo->FloorJobList["MaterialAmount"]; ?></div>
-			<?
+			<div>Total material = <?php echo $JobInfo->FloorJobList["MaterialAmount"]; ?></div>
+			<?php
 		}
 	?>
 	</div>
@@ -203,15 +203,15 @@ textarea {
 <script>
 	$(function() {	
 		$( "input[type=button],input[type=submit], a, button" ).button();
-		<?
+		<?php
 			if(!empty($JobInfo->ProjectID)) {
 				?>
-				$("#ProjectID").val("<? echo $JobInfo->ProjectID; ?>");
-				<?
+				$("#ProjectID").val("<?php echo $JobInfo->ProjectID; ?>");
+				<?php
 				if(!empty($JobInfo->FloorJobList["Material"])) {
 					?>
-					LoadProjectMaterial( "<? echo $JobInfo->ProjectID; ?>" , "<? echo $JobInfo->FloorJobList["Material"]; ?>");
-					<?
+					LoadProjectMaterial( "<?php echo $JobInfo->ProjectID; ?>" , "<?php echo $JobInfo->FloorJobList["Material"]; ?>");
+					<?php
 				}
 			}
 		?>		

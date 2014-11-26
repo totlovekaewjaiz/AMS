@@ -92,46 +92,46 @@
 <th style = "width:80px;">Updated by</th>
 <th style = "width:80px;">Updated date</th>
 </tr>
-<?
+<?php
 	if(count($AllData) == 0) {
 		?>
 		<tr>
 		<td colspan = '9' class = "noAbility" >No Project Info</td>
 		</tr>
-		<?
+		<?php
 	} else {
 		for($i = 0;$i < count($AllData) ;$i++ ) {
 			
 			if($i%2 == 0) {
-				/*onclick = "changePage( '<? echo $AllSpellArray[$i]->id; ?>' )"*/
+				/*onclick = "changePage( '<?php echo $AllSpellArray[$i]->id; ?>' )"*/
 				?>
-				<tr class = "tableRow" onclick = "changePage( '<? echo $AllData[$i]->id; ?>' )">
-				<?
+				<tr class = "tableRow" onclick = "changePage( '<?php echo $AllData[$i]->id; ?>' )">
+				<?php
 			} else {
-				/*onclick = "changePage( '<? echo $AllSpellArray[$i]->id; ?>' )"*/
+				/*onclick = "changePage( '<?php echo $AllSpellArray[$i]->id; ?>' )"*/
 				?>
-				<tr onclick = "changePage( '<? echo $AllData[$i]->id; ?>' )">
-				<?
+				<tr onclick = "changePage( '<?php echo $AllData[$i]->id; ?>' )">
+				<?php
 			}
 			
 			$rowNo = $i + 1;
 			
 			?>
-			<td class = "tableDataCenter"><? echo $rowNo;?></td>
-			<td class = "Name"><? echo $AllData[$i]->ProjectName ; ?></td>	
-			<td class = "tableDataCenter"><? echo $AllData[$i]->Start ; ?></td>	
-			<td class = "tableDataCenter"><? echo $AllData[$i]->End ; ?></td>			
-			<td class = "tableDataCenter"><? 
+			<td class = "tableDataCenter"><?php echo $rowNo;?></td>
+			<td class = "Name"><?php echo $AllData[$i]->ProjectName ; ?></td>	
+			<td class = "tableDataCenter"><?php echo $AllData[$i]->Start ; ?></td>	
+			<td class = "tableDataCenter"><?php echo $AllData[$i]->End ; ?></td>			
+			<td class = "tableDataCenter"><?php 
 				$Num = rand(10,30);
 				echo $Num;
 			?></td>	
-			<td class = "tableDataCenter"><? echo $AllData[$i]->CreatedBy; ?></td>
-			<td class = "tableDataCenter"><? echo $AllData[$i]->CreatedDate; ?></td>
-			<td class = "tableDataCenter"><? echo $AllData[$i]->UpdatedBy; ?></td>
-			<td class = "tableDataCenter"><? echo $AllData[$i]->UpdatedDate; ?></td>
+			<td class = "tableDataCenter"><?php echo $AllData[$i]->CreatedBy; ?></td>
+			<td class = "tableDataCenter"><?php echo $AllData[$i]->CreatedDate; ?></td>
+			<td class = "tableDataCenter"><?php echo $AllData[$i]->UpdatedBy; ?></td>
+			<td class = "tableDataCenter"><?php echo $AllData[$i]->UpdatedDate; ?></td>
 				
 			</tr>
-			<?
+			<?php
 		}
 	}
 ?>

@@ -1,4 +1,4 @@
-<style>
+﻿<style>
 	th {
 		background-color:#CCCCCC;
 	}
@@ -73,12 +73,12 @@ textarea {
 	
 	function cancel() {
 		showLoadingPopup();
-		loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 	}
 	
 	function save() {
 		showLoadingPopup();
-		loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 	}
 	
 	function showSelectIcon() {
@@ -96,7 +96,7 @@ textarea {
 <div class = "ConfigContent" style = "padding:10px;">
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "Save" >
-	<input type = "hidden" id = "id" name = "id" value = "<? echo $MaterialID; ?>" >	
+	<input type = "hidden" id = "id" name = "id" value = "<?php echo $MaterialID; ?>" >	
 		
 	<table border = '1' style = "border-collapse:collapse;width:80%">
 	<tr>

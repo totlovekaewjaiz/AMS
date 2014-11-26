@@ -1,4 +1,4 @@
-<?
+<?php
 		
 	//define("FACEBOOK_APP_ID", '207935892655402');
 	//define("FACEBOOK_API_KEY", '207935892655402');

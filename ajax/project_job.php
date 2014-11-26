@@ -1,4 +1,4 @@
-<?
+﻿<?php
 	require_once("../config/constant.php");
 	require_once("../library/login_check.php");
 

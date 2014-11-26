@@ -1,4 +1,4 @@
-
+﻿
 <style>
 	th {
 		background-color:#CCCCCC;
@@ -102,11 +102,11 @@
 <div>
 <select id = "ProjectID" style = "width:200px;" onchange = "loadDatatable()" >
 <option value = "">All Project</option>
-<?
+<?php
 	for($i =0; $i < count($AllData); $i++) {
 		?>
-		<option value = "<? echo $AllData[$i]->id;?>"><? echo $AllData[$i]->ProjectName;?></option>
-		<?
+		<option value = "<?php echo $AllData[$i]->id;?>"><?php echo $AllData[$i]->ProjectName;?></option>
+		<?php
 	}
 ?>
 </select>

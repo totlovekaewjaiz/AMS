@@ -1,4 +1,4 @@
-<style>
+﻿<style>
 textarea {
     resize: none;
 }
@@ -44,7 +44,7 @@ textarea {
 	
 	function cancel() {
 		showLoadingPopup();
-		loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 	}
 	
 	function save() {
@@ -53,7 +53,7 @@ textarea {
 			$('#form').serialize()
 		, 
 		function(data){
-			loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+			loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 		});
 	}
 	
@@ -64,7 +64,7 @@ textarea {
 			$('#form').serialize()
 		, 
 		function(data){
-			loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+			loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 		});
 	}
 	
@@ -74,22 +74,22 @@ textarea {
 <div class = "ConfigContent" style = "padding:10px;">
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "Save" >
-	<input type = "hidden" id = "id" name = "id" value = "<? echo $JobID; ?>" >	
+	<input type = "hidden" id = "id" name = "id" value = "<?php echo $JobID; ?>" >	
 	
 	<div>โครงการ</div>
 	<div>
 	<select id = "ProjectID" name = "ProjectID">
-	<?
+	<?php
 		$AllData = $Loader->loadAllProject();
 		for($i =0; $i < count($AllData); $i++) {
 			?>
-			<option value = "<? echo $AllData[$i]->id;?>"><? echo $AllData[$i]->ProjectName;?></option>
-			<?
+			<option value = "<?php echo $AllData[$i]->id;?>"><?php echo $AllData[$i]->ProjectName;?></option>
+			<?php
 		}
 
 	?>
 	</select>
-	<script>$("#ProjectID").val("<? echo $JobInfo->ProjectID; ?>");</script>
+	<script>$("#ProjectID").val("<?php echo $JobInfo->ProjectID; ?>");</script>
 	</div>
 	
 	<div>ประเภทงาน</div>
@@ -103,23 +103,23 @@ textarea {
 	<option value = "6">งานประตู</option>
 	</select>
 	</div>
-	<script>$("#JobType").val("<? echo $JobInfo->JobType; ?>");</script>
+	<script>$("#JobType").val("<?php echo $JobInfo->JobType; ?>");</script>
 	<div>รหัสงาน</div>
-	<div><input type = "text" id = "JobName" name = "JobName" value = "<?  echo $JobInfo->JobName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>			
+	<div><input type = "text" id = "JobName" name = "JobName" value = "<?php  echo $JobInfo->JobName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>			
 	<div>รายการ</div>
 	<div>
-	<textarea style = "width:300px;height:100px;" id = "JobDescription" name = "JobDescription"><?  echo $JobInfo->JobDescription; ?></textarea>
+	<textarea style = "width:300px;height:100px;" id = "JobDescription" name = "JobDescription"><?php  echo $JobInfo->JobDescription; ?></textarea>
 	</div>		
 		
 	
 	
 	<div>
 	<input type = "button" value = "Save" class = "button" onclick = "save()">
-	<?
+	<?php
 		if(!empty($JobID)) {
 			?>
 			<input type = "button" value = "Delete" class = "button" onclick = "drop()">
-			<?
+			<?php
 		}
 	?>
 	<input type = "button" value = "Cancel"  class = "button" onclick = "cancel()">

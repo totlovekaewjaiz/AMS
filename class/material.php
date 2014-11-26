@@ -1,4 +1,4 @@
-<?
+<?php
 	class Material {
 		var $db;
 		

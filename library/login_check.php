@@ -1,4 +1,4 @@
-<?
+<?php
 	$db = new Database();
 	$db->Connection();
 	
