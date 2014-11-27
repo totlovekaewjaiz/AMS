@@ -33,14 +33,15 @@
 				include("../tools/material_spec.php");
 				break;			
 			case "MaterialProject" :
-				$AllData = $Loader->loadAllProject();
+				$AllData = $Loader->loadAllProject1();
 				//include("../tools/project.php");
 				include("../tools/project_material.php");
 				break;
 			case "MaterialPrice" :
 				//$AllData = $Loader->loadAllProject();
 				//include("../template/material_project.php");
-				include("../template/project_material_price.php");
+				//include("../template/project_material_price.php");
+				  include("../tools/project_material_price.php");
 				break;
 			case "JobProject" :
 				$AllData = $Loader->loadAllProject();

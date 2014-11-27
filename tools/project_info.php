@@ -100,7 +100,26 @@ textarea {
 	<div>Start Date</div>
 	<div><input type = "text" id = "Start" name = "Start" value = "<? echo $ProjectInfo->Start; ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
 	<div>End Date</div>
-	<div><input type = "text" id = "End" name = "End" value = "<? echo $ProjectInfo->End; ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
+	<div><input type = "text" id = "End" name = "End" value = "<? echo $ProjectInfo->End; ?>"  style = "width:200px;" class = "ui-corner-all"></div>
+	<div>
+
+		Status :
+		<select name="StatusProject">
+			<?
+			
+			    	if($ProjectInfo->Status == 'Y'){
+			    		echo '<option value="Y" selected="selected"> Available</option>';
+			    		echo '<option value="N" > UnAvailable</option>';
+			    	}else{
+			    		echo '<option value="Y" > Available</option>';
+			    		echo '<option value="N" selected="selected"> UnAvailable</option>';
+			    	}
+
+			    
+		?>
+		</select>
+	</div>
+	<br>
 	<div>
 	<input type = "button" value = "Save" class = "button" onclick = "save()">
 	<?

@@ -94,6 +94,7 @@
 <th style = "width:80px;">เพิ่มเมื่อ</th>
 <th style = "width:80px;">แก้ไขล่าสุดโดย</th>
 <th style = "width:80px;">แก้ไข่ล่าสุดเมื่อ</th>
+<th style = "width:80px;">สถานะ</th>
 </tr>
 
 <?
@@ -121,7 +122,8 @@
 			<td class = "tableDataCenter"><? echo $AllData[$i]->CreatedBy; ?></td>	
 			<td class = "tableDataCenter"><? echo $AllData[$i]->CreatedDate; ?></td>
 			<td class = "tableDataCenter"><? echo $AllData[$i]->UpdatedBy; ?></td>			
-			<td class = "tableDataCenter"><? echo $AllData[$i]->UpdatedDate; ?></td>		
+			<td class = "tableDataCenter"><? echo $AllData[$i]->UpdatedDate; ?></td>	
+			<td class = "tableDataCenter"><? echo $AllData[$i]->Status; ?></td>		
 			</tr>
 			<?
 		}

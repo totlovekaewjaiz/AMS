@@ -46,6 +46,23 @@
 		function loadAllProject() {
 			$Array = array();
 			$params = array();
+			$sql = "SELECT * FROM  project ";
+			$resultArray = $this->db->select ( $sql , $params );
+			$numrows = $resultArray["numrows"];
+			$result = $resultArray["datas"];
+			for($i =0;$i < $numrows ;$i++) {
+				$datas = mysql_fetch_array($result);
+				
+				$Array[$i] = new Project($datas["id"] , $this->db);
+			}
+			//======================
+				
+			return $Array;
+		}
+
+		function loadAllProject1() {
+			$Array = array();
+			$params = array();
 			$sql = "SELECT * FROM  project WHERE Status = 'Y'";
 			$resultArray = $this->db->select ( $sql , $params );
 			$numrows = $resultArray["numrows"];
@@ -112,6 +129,26 @@
 				$datas = mysql_fetch_array($result);
 				
 				$Array[$i] = new Material($datas["MaterialID"] , $this->db);
+			}
+			//======================
+				
+			return $Array;
+		}
+
+		function loadAllProjectMaterial1( $ProjectID ) {
+			$Array = array();
+			$params = array();
+			$sql = "SELECT * FROM  project_material 
+					LEFT JOIN project ON  project_material.ProjectID = project.id 
+					WHERE project.Status = 'Y' GROUP BY ProjectID";
+			$params["ProjectID"] = $ProjectID;			
+			$resultArray = $this->db->select ( $sql , $params );
+			$numrows = $resultArray["numrows"];
+			$result = $resultArray["datas"];
+			for($i =0;$i < $numrows ;$i++) {
+				$datas = mysql_fetch_array($result);
+				
+				$Array[$i] = new Project($datas["ProjectID"] , $this->db);
 			}
 			//======================
 				

@@ -7,6 +7,7 @@
 	require("../class/job.php");
 	require("../class/material.php");
 	require("../class/project.php");
+	require("../class/materialP.php");
 	
 	session_start();
 	

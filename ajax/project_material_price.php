@@ -4,11 +4,21 @@
 
 	$action = $_POST["action"];
 	
-	if($action == "loadMaterialPrice") {
+	/*if($action == "loadMaterialPrice") {
 		include("../tools/material_price_info.php");
 	}
+*/
+
+	if($action == "changePage") {
+		$ProjectID	=	$_POST['ProjectID'];
+		$Project 	= 	new materialP( $ProjectID , $db );
+		include("../tools/project_material_price_info.php");
+		
+	}
+
 	
-	if($action == "loadMaterialInfo") {
+	
+/*	if($action == "loadMaterialInfo") {
 		
 		$ProjectID = $_POST["ProjectID"];
 		
@@ -40,12 +50,12 @@
 					
 					if($rowNo%2 == 0) {
 						/*changePage( '<? echo $MaterialID; ?>' )*/
-						?>
+			/*			?>
 						<tr class = "tableRow" onclick = "loadMaterialPrice( '<? echo $MaterialID; ?>')">
 						<?
 					} else {
 						/*changePage( '<? echo $MaterialID; ?>' )*/
-						?>
+		/*				?>
 						<tr onclick = "loadMaterialPrice( '<? echo $MaterialID; ?>')">
 						<?
 					}
@@ -78,7 +88,7 @@
 		?>
 		</table>
 		<?
-	}
+	}*/
 	
 	
 ?>

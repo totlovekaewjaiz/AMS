@@ -14,7 +14,8 @@
 		var $UpdatedBy;
 		var $UpdatedDate;
 		var $Status;
-		
+		var $ProjectStatus;
+
 		var $MaterialList = array();
 		var $JobList = array();
 		
@@ -42,6 +43,8 @@
 			$this->Start = $datas["Start"];
 			$this->End = $datas["End"];
 			$this->Status = $datas["Status"];
+			$this->ProjectStatus = $datas["ProjectStatus"];
+			
 			$this->CreatedBy = $datas["CreatedBy"];
 			$this->CreatedDate = $datas["CreatedDate"];
 			$this->UpdatedBy = $datas["UpdatedBy"];
@@ -72,7 +75,8 @@
 						ProjectDescription = ? , 
 						`Start` = ? , 
 						`End` = ? ,  
-						UpdatedBy = ? 
+						UpdatedBy = ? ,
+						Status = ? ,
 						WHERE id = ? 
 						";
 				$params["ProjectName"] = $this->ProjectName;
@@ -80,7 +84,9 @@
 				$params["Start"] = $this->Start;
 				$params["End"] = $this->End;
 				$params["UpdatedBy"] = $this->CreatedBy;
+				$params["ProjectStatus"] = $this->ProjectStatus;
 				$params["id"] = $this->id;
+				
 				
 				$this->db->execute ( $sql , $params );
 			} else {

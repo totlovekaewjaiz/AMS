@@ -60,11 +60,24 @@
 </style>
 <script>
 
-	function changePage( id ) {
+	/*function changePage( id ) {
 		showLoadingPopup();
 		$.post("../template/demo.php",
 				{ 
 					"action": "project_material_price",
+					"ProjectID" : id
+				}
+		, 
+		function(data){
+			$("#menu_content").html(data);
+		});
+	}*/
+
+	function changePage( id ) {
+		showLoadingPopup();
+			$.post("../ajax/project_material_price.php",
+				{ 
+					"action": "changePage",
 					"ProjectID" : id
 				}
 		, 
@@ -80,8 +93,12 @@
 </script>
 
 <div>
-<table border = '1' style = "border-collapse:collapse;width:100%" onclick = "changePage( '')">
-<tr>
+<?php
+	$AllData = $Loader->loadAllProjectMaterial1();
+
+	?>
+<table border = '1' style = "border-collapse:collapse;width:100%">
+	<tr>
 <th style = "width:30px;">No</th>
 <th style = "width:80px;">ชื่อโครงการ</th>
 <th style = "width:80px;">วันเริ่มต้น</th>
@@ -91,17 +108,47 @@
 <th style = "width:80px;">แก้ไขล่าสุดโดย</th>
 <th style = "width:80px;">แก้ไข่ล่าสุดเมื่อ</th>
 </tr>
+<?php 
+		if(count($AllData) > 0 ) {
+		
+		for($i = 0; $i < count($AllData); $i++) {
+			$No = $i + 1;
+		//	echo "<script>alert('".$AllData[$i]->id. "')</script>";
+			if($i % 2 == 0) {
+				?>
+				<tr class = 'tableRow' onclick = "changePage('<? echo $AllData[$i]->id ?>')" >
+				<?
+			} else {
+				?>
+				<tr onclick = "changePage('<? echo $AllData[$i]->id ?>')">
+				<?
+			}
+?>
 
-<tr class = 'tableRow'>
-<td class = "tableDataCenter">1</td>
-<td class = "tableDataCenter">อาคารพญาไทยพลาซ่า</td>	
-<td class = "tableDataCenter">2014-05-21</td>			
-<td class = "tableDataCenter">2014-05-23</td>
-<td class = "tableDataCenter">Administrator</td>	
-<td class = "tableDataCenter">2014-05-21 23:45:32</td>
-<td class = "tableDataCenter">Administrator</td>			
-<td class = "tableDataCenter">2014-05-21 23:47:12</td>		
+
+	<td class = "tableDataCenter"><? echo $No; ?></td>
+	<td class = "tableDataCenter"><? echo $AllData[$i]->ProjectName; ?></td>	
+	<td class = "tableDataCenter"><? echo $AllData[$i]->Start; ?></td>			
+	<td class = "tableDataCenter"><? echo $AllData[$i]->End; ?></td>
+	<td class = "tableDataCenter"><? echo $AllData[$i]->CreatedBy; ?></td>	
+	<td class = "tableDataCenter"><? echo $AllData[$i]->CreatedDate; ?>/td>
+	<td class = "tableDataCenter"><? echo $AllData[$i]->UpdatedBy; ?></td>			
+	<td class = "tableDataCenter"><? echo $AllData[$i]->UpdatedDate; ?></td>		
 </tr>
+<?php
+
+				}
+	} else {
+		?>
+		<tr class = 'tableRow'>
+		<td colspan = "7">No project found</td>
+		</tr>
+		<?
+	}
+			?>
+
+
+
 
 
 </table>

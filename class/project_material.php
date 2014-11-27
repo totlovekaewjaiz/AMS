@@ -1,3 +1,4 @@
+
 <?
 	
 	class ProjectMaterial {
@@ -19,7 +20,7 @@
 		var $Status;
 		
 		function __construct( $db ){
-			$this->db = $db;			
+			$this->db = $db;	
 		}
 		
 		function loadProjectMaterial() {
