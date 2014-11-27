@@ -48,7 +48,7 @@ textarea {
 	
 	function cancel() {
 		showLoadingPopup();
-		loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 	}
 	
 	function save() {
@@ -60,7 +60,7 @@ textarea {
 			, 
 			function(data){
 				//$("#result").html(data);
-				loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+				loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 			});
 		} else {
 			alert("All Slot Height not Equal Wall Height");
@@ -120,7 +120,7 @@ textarea {
 	<div id = "result"></div>
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "getImageInfo" >
-	<input type = "hidden" id = "id" name = "id" value = "<? echo $JobID; ?>" >	
+	<input type = "hidden" id = "id" name = "id" value = "<?php echo $JobID; ?>" >	
 	<input type = "hidden" id = "JobType" name = "JobType" value = "2" >	
 	
 	<div style = "width:30%;height:auto;float:left;">
@@ -128,38 +128,38 @@ textarea {
 	<div>
 	<select id = "ProjectID" name = "ProjectID" class = "ui-corner-all" style = "width:200px;" onchange = "LoadProjectMaterial( this.value , '')">
 	<option value = "">Select Project</option>
-	<?
+	<?php
 		for($i =0;$i < count($ProjectArray);$i++) {
 			?>
-			<option value = "<? echo $ProjectArray[$i]->id;?>"><? echo $ProjectArray[$i]->ProjectName;?></option>
-			<?
+			<option value = "<?php echo $ProjectArray[$i]->id;?>"><?php echo $ProjectArray[$i]->ProjectName;?></option>
+			<?php
 		}
 	?>
 	</select>
 	</div>
 	
 	<div>Job name</div>
-	<div><input type = "text" id = "JobName" name = "JobName" value = "<? echo $JobInfo->JobName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
+	<div><input type = "text" id = "JobName" name = "JobName" value = "<?php echo $JobInfo->JobName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
 		
 	<hr/>
 	<div style = "border:solid;1px;padding:3px;margin:3px;">
 	<div>Height</div>
 	<div>
-	<input class = "wallHeight" type = "text" id = "Height" name = "Height" value = "<? echo $JobInfo->WallJobList["Height"]; ?>"  style = "width:200px;" class = "ui-corner-all"  >	
+	<input class = "wallHeight" type = "text" id = "Height" name = "Height" value = "<?php echo $JobInfo->WallJobList["Height"]; ?>"  style = "width:200px;" class = "ui-corner-all"  >	
 	</div>		
 			
 	<div>Width</div>
 	<div>
-	<input class = "wallWidth" type = "text" id = "Width" name = "Width" value = "<? echo $JobInfo->WallJobList["Width"]; ?>"  style = "width:200px;" class = "ui-corner-all"  >	
+	<input class = "wallWidth" type = "text" id = "Width" name = "Width" value = "<?php echo $JobInfo->WallJobList["Width"]; ?>"  style = "width:200px;" class = "ui-corner-all"  >	
 	</div>
 			
 	<div>Num Slot</div>
 	<div>
-	<input class = "numSlot" type = "text" id = "Slot" name = "Slot" value = "<? echo $JobInfo->WallJobList["Slot"]; ?>"  style = "width:200px;" class = "ui-corner-all"  onchange = "loadSlotInfo( this.value );" >	
+	<input class = "numSlot" type = "text" id = "Slot" name = "Slot" value = "<?php echo $JobInfo->WallJobList["Slot"]; ?>"  style = "width:200px;" class = "ui-corner-all"  onchange = "loadSlotInfo( this.value );" >	
 	</div>	
 		
 	<div id = "SlotInfo">
-	<?
+	<?php
 		$MaterialArray = $Loader->loadAllProjectMaterial($JobInfo->ProjectID );
 		$MaterialType = "Finish";
 		
@@ -167,20 +167,20 @@ textarea {
 			for($i =0;$i < $JobInfo->WallJobList["Slot"] ;$i++) {
 				?>
 				<hr/>
-				<div style = "text-align:center">Slot <? echo $i; ?></div>
+				<div style = "text-align:center">Slot <?php echo $i; ?></div>
 				<hr/>
 				<div>Height</div>
 				<div>
-				<input class = "slotHeight" type = "text" id = "Height_<? echo $i; ?>" name = "SlotHeight[]" value = "<? echo $JobInfo->WallJobList["slotHeight"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all"  >
-				<input type = "button"  onclick = "setAllHeight('<? echo $i; ?>');" value = "All" > 
+				<input class = "slotHeight" type = "text" id = "Height_<?php echo $i; ?>" name = "SlotHeight[]" value = "<?php echo $JobInfo->WallJobList["slotHeight"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all"  >
+				<input type = "button"  onclick = "setAllHeight('<?php echo $i; ?>');" value = "All" > 
 				</div>					
 				
-				<div id = "AreaInfo_<? echo $i; ?>" ></div>
+				<div id = "AreaInfo_<?php echo $i; ?>" ></div>
 				
 				<div>Material</div>
 				<div>
-				<select class = "finishInfo" id = "Finish_<? echo $i; ?>" name = "SlotFinish[]" style = "width:200px;" >
-				<?
+				<select class = "finishInfo" id = "Finish_<?php echo $i; ?>" name = "SlotFinish[]" style = "width:200px;" >
+				<?php
 					
 					
 					for($j = 0;$j < count($MaterialArray);$j++) {
@@ -188,21 +188,21 @@ textarea {
 						
 							if($MaterialArray[$j]->id == $JobInfo->WallJobList["SlotFinish"][$i]) {
 								?>
-								<option value = "<? echo $MaterialArray[$j]->id;?>" selected ><? echo $MaterialArray[$j]->MaterialName;?></option>
-								<?
+								<option value = "<?php echo $MaterialArray[$j]->id;?>" selected ><?php echo $MaterialArray[$j]->MaterialName;?></option>
+								<?php
 							} else {
 								?>
-								<option value = "<? echo $MaterialArray[$j]->id;?>"><? echo $MaterialArray[$j]->MaterialName;?></option>
-								<?
+								<option value = "<?php echo $MaterialArray[$j]->id;?>"><?php echo $MaterialArray[$j]->MaterialName;?></option>
+								<?php
 							}
 						}
 					}
 				
 				?>			
 				</select>
-				<input type = "button"  onclick = "setAllMaterial('<? echo $i; ?>');" value = "All"> 
+				<input type = "button"  onclick = "setAllMaterial('<?php echo $i; ?>');" value = "All"> 
 				</div>					
-				<?			
+				<?php			
 			}
 		}
 	?>	
@@ -222,11 +222,11 @@ textarea {
 <script>
 	$(function() {	
 		$( "input[type=button],input[type=submit], a, button" ).button();
-		<?
+		<?php
 			if(!empty($JobInfo->ProjectID)) {
 				?>
-				$("#ProjectID").val("<? echo $JobInfo->ProjectID; ?>");
-				<?
+				$("#ProjectID").val("<?php echo $JobInfo->ProjectID; ?>");
+				<?php
 			}
 		?>
 		closePopup();		

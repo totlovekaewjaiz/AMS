@@ -1,7 +1,7 @@
 <div class="ui-widget-header title">Logout</div>
 <div class = "LogoutPopupContent" style = "background-color:#FFEEFF;color:#777777">
 <div style = "height:40px;">
-<?
+<?php
 	echo $Message;
 ?>
 </div>

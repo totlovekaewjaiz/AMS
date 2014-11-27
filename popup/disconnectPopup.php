@@ -1,7 +1,7 @@
 <div class="ui-widget-header title">Disconnected</div>
 <div class = "LogoutPopupContent">
 <div style = "height:40px;">
-<?
+<?php
 	echo $Message;
 ?>
 </div>

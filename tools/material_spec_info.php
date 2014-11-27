@@ -1,4 +1,4 @@
-<?php require_once("../config/constant.php"); ?>
+﻿<?php require_once("../config/constant.php"); ?>
 <style>
 textarea {
     resize: none;
@@ -45,7 +45,7 @@ textarea {
 	
 	function cancel() {
 		showLoadingPopup();
-		loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 	}
 	
 	function save() {
@@ -54,7 +54,7 @@ textarea {
 			$('#form').serialize()
 		, 
 		function(data){
-			loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+			loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 		});
 	}
 	
@@ -65,7 +65,7 @@ textarea {
 			$('#form').serialize()
 		, 
 		function(data){
-			loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+			loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 		});
 	}
 	
@@ -75,12 +75,12 @@ textarea {
 <div class = "ConfigContent" style = "padding:10px;">
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "Save" >
-	<input type = "hidden" id = "id" name = "id" value = "<?   echo $MaterialInfo->id; ?>" >	
+	<input type = "hidden" id = "id" name = "id" value = "<?php   echo $MaterialInfo->id; ?>" >	
 	
 	<div>รหัสวัสดุ</div>
-	<div><input type = "text" id = "MaterialCode" name = "MaterialCode" value = "<?   echo $MaterialInfo->MaterialCode; ?>"  style = "width:200px;" class = "ui-corner-all"></div>			
+	<div><input type = "text" id = "MaterialCode" name = "MaterialCode" value = "<?php   echo $MaterialInfo->MaterialCode; ?>"  style = "width:200px;" class = "ui-corner-all"></div>			
 	<div>ชื่อวัสดุ</div>
-	<div><input type = "text" id = "MaterialName" name = "MaterialName" value = "<?   echo $MaterialInfo->MaterialName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>			
+	<div><input type = "text" id = "MaterialName" name = "MaterialName" value = "<?php   echo $MaterialInfo->MaterialName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>			
 	<div>ประเภทวัสดุ</div>
 	<div><select name="MaterialType" style="width:200px;" class = "ui-corner-all">
 		<?php
@@ -99,20 +99,20 @@ textarea {
 		?>
 	</select></div>
 	<div>กว้าง</div>
-	<div><input type = "text" id = "MaterialWidth" name = "MaterialWidth" value = "<?  echo $MaterialInfo->MaterialWidth; ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
+	<div><input type = "text" id = "MaterialWidth" name = "MaterialWidth" value = "<?php  echo $MaterialInfo->MaterialWidth; ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
 	<div>ยาว</div>
-	<div><input type = "text" id = "MaterialHeight" name = "MaterialHeight" value = "<?  echo $MaterialInfo->MaterialHeight; ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
+	<div><input type = "text" id = "MaterialHeight" name = "MaterialHeight" value = "<?php  echo $MaterialInfo->MaterialHeight; ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
 	<div>ราคา</div>
-	<div><input type = "text" id = "MaterialPrice" name = "MaterialPrice" value = "<?  echo $MaterialInfo->MaterialPrice; ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
+	<div><input type = "text" id = "MaterialPrice" name = "MaterialPrice" value = "<?php  echo $MaterialInfo->MaterialPrice; ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
 
 	
 	<div>
 	<input type = "button" value = "Save" class = "button" onclick = "save()">
-	<?
+	<?php
 		if(!empty($MaterialID)){
 	?>
 			<input type = "button" value = "Delete" class = "button" onclick = "drop()">
-	<?
+	<?php
 		}
 	?>
 	<input type = "button" value = "Cancel"  class = "button" onclick = "cancel()">

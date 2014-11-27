@@ -48,7 +48,7 @@ textarea {
 	
 	function cancel() {
 		showLoadingPopup();
-		loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 	}
 	
 	function save() {
@@ -57,7 +57,7 @@ textarea {
 			$('#form').serialize()
 		, 
 		function(data){
-			loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+			loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 		});
 	}
 	
@@ -66,29 +66,29 @@ textarea {
 <div class = "ConfigContent" style = "padding:10px;">
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "Save" >
-	<input type = "hidden" id = "id" name = "id" value = "<? echo $ProjectID; ?>" >	
+	<input type = "hidden" id = "id" name = "id" value = "<?php echo $ProjectID; ?>" >	
 	
 	<table border = '1' style = "border-collapse:collapse;width:80%">
 	
-	<?
+	<?php
 		for($i =0;$i < count($AllData); $i++) {
 			?>
 			<tr>
-			<td><input type = "checkbox" id = "Material_<? echo $AllData[$i]->id ?>" name = "MaterialList[]" value = "<? echo $AllData[$i]->id ?>"></td>
-			<td><? echo $AllData[$i]->MaterialCode ?></td>
-			<td><? echo $AllData[$i]->MaterialName ?></td>
+			<td><input type = "checkbox" id = "Material_<?php echo $AllData[$i]->id ?>" name = "MaterialList[]" value = "<?php echo $AllData[$i]->id ?>"></td>
+			<td><?php echo $AllData[$i]->MaterialCode ?></td>
+			<td><?php echo $AllData[$i]->MaterialName ?></td>
 			</tr>
-			<?
+			<?php
 		}
 	?>
 	
 	</table>
 	
-	<?
+	<?php
 		foreach($ProjectInfo->MaterialList as $index => $value) {
 			?>
-			<script>$("#Material_<? echo $value; ?>").attr("checked" , true);</script>
-			<?
+			<script>$("#Material_<?php echo $value; ?>").attr("checked" , true);</script>
+			<?php
 		}
 	?>
 	

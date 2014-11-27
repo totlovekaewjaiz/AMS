@@ -1,4 +1,4 @@
-<style>
+﻿<style>
 textarea {
     resize: none;
 }
@@ -50,7 +50,7 @@ textarea {
 	
 	function cancel() {
 		showLoadingPopup();
-		loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 	}
 	
 	function save() {
@@ -59,7 +59,7 @@ textarea {
 			$('#form').serialize()
 		, 
 		function(data){
-			loadMenu('<? echo $_SESSION["menu_code"]; ?>');
+			loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 		});
 	}
 	
@@ -79,17 +79,17 @@ textarea {
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "Save" >
 	
-	<?
+	<?php
 		if(empty($Username)) {
 			?>
 			<div>Username</div>
-			<div><input type = "text" id = "Username" name = "Username" value = "<? echo $AccountInfo->Username;  ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
-			<?
+			<div><input type = "text" id = "Username" name = "Username" value = "<?php echo $AccountInfo->Username;  ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
+			<?php
 		} else {
 			?>
 			<div>Username</div>
-			<div><input type = "hidden" id = "Username" name = "Username" value = "<? echo $Username;  ?>" ><? echo $Username;  ?></div>	
-			<?
+			<div><input type = "hidden" id = "Username" name = "Username" value = "<?php echo $Username;  ?>" ><?php echo $Username;  ?></div>	
+			<?php
 		}
 	
 	?>
@@ -99,14 +99,14 @@ textarea {
 	<div><input type = "text" id = "Password" name = "Password" value = ""  style = "width:200px;" class = "ui-corner-all"></div>
 	
 	<div>ชื่อ</div>
-	<div><input type = "text" id = "Firstname" name = "Firstname" value = "<?  echo $AccountInfo->Firstname;?>"  style = "width:200px;" class = "ui-corner-all"></div>
+	<div><input type = "text" id = "Firstname" name = "Firstname" value = "<?php  echo $AccountInfo->Firstname;?>"  style = "width:200px;" class = "ui-corner-all"></div>
 	
 	<div>นามสกุล</div>
-	<div><input type = "text" id = "Lastname" name = "Lastname" value = "<? echo $AccountInfo->Lastname; ?>"  style = "width:200px;" class = "ui-corner-all"></div>
+	<div><input type = "text" id = "Lastname" name = "Lastname" value = "<?php echo $AccountInfo->Lastname; ?>"  style = "width:200px;" class = "ui-corner-all"></div>
 	
 	<div>ความสามารถในการเข้าถึงข้อมูล</div>
 	<div>
-	<?
+	<?php
 		$Menu = $Loader->loadAllMenu();
 	
 		for($i =0;$i < count($Menu);$i++) {
@@ -119,12 +119,12 @@ textarea {
 			
 			if($MenuSelected) { 
 				?>
-				<div><input type = "checkbox" id = "Menu_<? echo $Menu[$i]["id"]; ?>" name = "MenuList[]" value = "<? echo $Menu[$i]["id"]; ?>" checked > <? echo $Menu[$i]["MenuName"]; ?></div>
-				<?
+				<div><input type = "checkbox" id = "Menu_<?php echo $Menu[$i]["id"]; ?>" name = "MenuList[]" value = "<?php echo $Menu[$i]["id"]; ?>" checked > <?php echo $Menu[$i]["MenuName"]; ?></div>
+				<?php
 			} else {
 				?>
-				<div><input type = "checkbox" id = "Menu_<? echo $Menu[$i]["id"]; ?>" name = "MenuList[]" value = "<? echo $Menu[$i]["id"]; ?>" > <? echo $Menu[$i]["MenuName"]; ?></div>
-				<?
+				<div><input type = "checkbox" id = "Menu_<?php echo $Menu[$i]["id"]; ?>" name = "MenuList[]" value = "<?php echo $Menu[$i]["id"]; ?>" > <?php echo $Menu[$i]["MenuName"]; ?></div>
+				<?php
 			}
 		}
 	?>	

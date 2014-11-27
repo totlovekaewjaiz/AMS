@@ -84,14 +84,14 @@
 <div id = "content" >
 
 <div id = "main_tools">
-<div id = "AdminUsername" ><? echo $Account->Username; ?></div>
+<div id = "AdminUsername" ><?php echo $Account->Username; ?></div>
 <div><img src = "../resource/icon/logout.png" class = "logout" onclick = "showLogoutPopup()" ></div>
 <div id = "AdminClock"></div>
 </div>
 
 <div class = "left_menu">
 
-<?
+<?php
 	$Menu = $Loader->loadAllMenu();
 	
 	for($i =0;$i < count($Menu);$i++) {
@@ -99,8 +99,8 @@
 		for($j = 0; $j < count($Account->MenuList); $j++ ) {
 			if($Account->MenuList[$j]["MenuID"] == $Menu[$i]["id"]) { 
 				?>
-				<div class = "menu"><div class = "MenuLabel" onclick = "loadMenu( '<? echo $Menu[$i]["MenuCode"]; ?>');"><? echo $Menu[$i]["MenuName"]; ?></div></div>
-				<?
+				<div class = "menu"><div class = "MenuLabel" onclick = "loadMenu( '<?php echo $Menu[$i]["MenuCode"]; ?>');"><?php echo $Menu[$i]["MenuName"]; ?></div></div>
+				<?php
 			}
 		}
 	}
@@ -150,12 +150,12 @@ Loadiing
 <script>
 runclock();
 </script>
-<?
+<?php
 
 if(!empty($_SESSION["menu_code"])){
 	?>
-	<script>loadMenu('<? echo $_SESSION["menu_code"]; ?>')</script>
-	<?
+	<script>loadMenu('<?php echo $_SESSION["menu_code"]; ?>')</script>
+	<?php
 }
 
 ?>

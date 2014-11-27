@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 
 <?
+=======
+<?php
+>>>>>>> 93b88a5c3417f823f031048038938d979cf6ae13
 	
 	class ProjectMaterial {
 		var $db;
