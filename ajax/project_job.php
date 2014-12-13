@@ -31,17 +31,25 @@
 	}
 	
 	if($action == "ceiling") {
+		$ProjectID = $_POST['ProjectID'];
+		$JobInfo = new Job($ProjectID  , $db);
+		$ProjectArray = $Loader->loadAllActiveProject();
 		include("../tools/ceil_job_info.php");
 	}
 	
 	if($action == "floor") {
-		$JobInfo = new Job(10  , $db);
+		$ProjectID = $_POST['ProjectID'];
+		$JobInfo = new Job($ProjectID  , $db);
 		$ProjectArray = $Loader->loadAllActiveProject();
 		
 		include("../tools/floor_job_info.php");
 	}
 	
 	if($action == "wall") {
+		$ProjectID = $_POST['ProjectID'];
+		$JobInfo = new Job($ProjectID  , $db);
+		$ProjectArray = $Loader->loadAllActiveProject();
+		
 		include("../tools/wall_job_info.php");
 	}
 	

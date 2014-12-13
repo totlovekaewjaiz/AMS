@@ -131,8 +131,8 @@
 	<td class = "tableDataCenter"><? echo $AllData[$i]->Start; ?></td>			
 	<td class = "tableDataCenter"><? echo $AllData[$i]->End; ?></td>
 	<td class = "tableDataCenter"><? echo $AllData[$i]->CreatedBy; ?></td>	
-	<td class = "tableDataCenter"><? echo $AllData[$i]->CreatedDate; ?>/td>
-	<td class = "tableDataCenter"><? echo $AllData[$i]->UpdatedBy; ?></td>			
+	<td class = "tableDataCenter"><? echo $AllData[$i]->CreatedDate; ?></td>
+	<td class = "tableDataCenter"><? echo $AllData[$i]->UpdatedBy; ?> </td>			
 	<td class = "tableDataCenter"><? echo $AllData[$i]->UpdatedDate; ?></td>		
 </tr>
 <?php

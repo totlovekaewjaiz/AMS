@@ -100,7 +100,7 @@ textarea {
 	<div>Start Date</div>
 	<div><input type = "text" id = "Start" name = "Start" value = "<?php echo $ProjectInfo->Start; ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
 	<div>End Date</div>
-<<<<<<< HEAD
+
 	<div><input type = "text" id = "End" name = "End" value = "<? echo $ProjectInfo->End; ?>"  style = "width:200px;" class = "ui-corner-all"></div>
 	<div>
 
@@ -121,9 +121,9 @@ textarea {
 		</select>
 	</div>
 	<br>
-=======
+<!--
 	<div><input type = "text" id = "End" name = "End" value = "<?php echo $ProjectInfo->End; ?>"  style = "width:200px;" class = "ui-corner-all"></div>	
->>>>>>> 93b88a5c3417f823f031048038938d979cf6ae13
+-->
 	<div>
 	<input type = "button" value = "Save" class = "button" onclick = "save()">
 	<?php

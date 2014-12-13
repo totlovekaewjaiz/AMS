@@ -96,13 +96,13 @@ textarea {
 <div class = "ConfigContent" style = "padding:10px;">
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "Save" >
-<<<<<<< HEAD
+<!--
 	<input type = "hidden" id = "id" name = "id" value = "<? echo $Project->id; ?>" >	
 
-=======
+-->
 	<input type = "hidden" id = "id" name = "id" value = "<?php echo $MaterialID; ?>" >	
 		
->>>>>>> 93b88a5c3417f823f031048038938d979cf6ae13
+
 	<table border = '1' style = "border-collapse:collapse;width:80%">
 		<tr>
 		<th>รหัสวัสดุ</th>

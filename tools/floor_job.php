@@ -61,6 +61,7 @@
 <script>
 
 	function changePage( id ) {
+
 		showLoadingPopup();
 		$.post("../ajax/project_job.php",
 				{ 
@@ -92,7 +93,7 @@
 <th style = "width:80px;">แก้ไข่ล่าสุดเมื่อ</th>
 </tr>
 
-<tr onclick = "changePage( '' )">
+<tr onclick = "changePage('2')">
 <td class = "tableDataCenter" >1</td>
 <td class = "Name">อาคารพญาไทยพลาซ่า</td>
 <td class = "tableDataCenter">F-1</td>	
@@ -103,7 +104,7 @@
 <td class = "tableDataCenter">2014-05-21 23:45:42</td>	
 </tr>
 
-<tr class = 'tableRow'>
+<tr onclick = "changePage( '10' )">
 <td class = "tableDataCenter">2</td>
 <td class = "Name">อาคารพญาไทยพลาซ่า</td>				
 <td class = "tableDataCenter">F-2</td>

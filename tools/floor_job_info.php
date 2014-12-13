@@ -169,7 +169,8 @@ textarea {
 	<div id = "ObjectDetail">
 	
 	</div>
-	
+	<div>Reserve ( % )</div>
+	<div><input type="input" style = "width:200px;" class = "ui-corner-all" name="reserve" id="reserve" value=""/></div>
 	
 	</div>
 	<div style = "width:70%;height:500px;float:left;overflow:auto;">

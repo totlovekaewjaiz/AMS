@@ -92,7 +92,7 @@
 <th style = "width:80px;">แก้ไข่ล่าสุดเมื่อ</th>
 </tr>
 
-<tr>
+<tr onclick = "changePage('9')" > 
 <td class = "tableDataCenter">1</td>
 <td class = "Name">อาคารพญาไทยพลาซ่า</td>
 <td class = "tableDataCenter">C-1</td>	

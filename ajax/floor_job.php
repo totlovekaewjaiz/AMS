@@ -124,7 +124,7 @@
 		$ImageArray[] = $Width + $ShiftPointStart;
 		$ImageArray[] = $ShiftPointStart;
 		
-		
+		$reserve  = $_POST['reserve'];
 		
 		// Create a blank image
 		$image = imagecreatetruecolor($Width + $ShiftPointStart + $ShiftPointStart , $Long + $ShiftPointStart + $ShiftPointStart);
@@ -343,7 +343,8 @@
 			}			
 		}
 		
-		
+		$net = $MaterialCount+($reserve/100);
+		$ceil = ceil($net);
 		
 		imagepng($image , "../resource/image/$JobName.png");
 		imagedestroy($image);
@@ -351,6 +352,8 @@
 		echo "<div><img src = '../resource/image/$JobName.png?".rand(0,32000)."' /></div>";
 		echo "<input type = 'hidden' name = 'MaterialAmount' value = '$MaterialCount'>";
 		echo "<div>Total material = $MaterialCount</div>";
+		echo "<div>Reserve material = $net</div>";
+		echo "<div>Net Total material = $ceil</div>";
 	}
 	
 ?>

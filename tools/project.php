@@ -97,7 +97,7 @@
 <th style = "width:80px;">สถานะ</th>
 </tr>
 
-<?php
+<?
 	if(count($AllData) > 0 ) {
 	
 		for($i = 0; $i < count($AllData); $i++) {
@@ -115,7 +115,7 @@
 			}
 			?>
 			
-<<<<<<< HEAD
+
 			<td class = "tableDataCenter"><? echo $No; ?></td>
 			<td class = "tableDataCenter"><? echo $AllData[$i]->ProjectName; ?></td>	
 			<td class = "tableDataCenter"><? echo $AllData[$i]->Start; ?></td>			
@@ -125,8 +125,8 @@
 			<td class = "tableDataCenter"><? echo $AllData[$i]->UpdatedBy; ?></td>			
 			<td class = "tableDataCenter"><? echo $AllData[$i]->UpdatedDate; ?></td>	
 			<td class = "tableDataCenter"><? echo $AllData[$i]->Status; ?></td>		
-=======
-			<td class = "tableDataCenter"><?php echo $No; ?></td>
+
+		<!--	<td class = "tableDataCenter"><?php echo $No; ?></td>
 			<td class = "tableDataCenter"><?php echo $AllData[$i]->ProjectName; ?></td>	
 			<td class = "tableDataCenter"><?php echo $AllData[$i]->Start; ?></td>			
 			<td class = "tableDataCenter"><?php echo $AllData[$i]->End; ?></td>
@@ -134,7 +134,7 @@
 			<td class = "tableDataCenter"><?php echo $AllData[$i]->CreatedDate; ?></td>
 			<td class = "tableDataCenter"><?php echo $AllData[$i]->UpdatedBy; ?></td>			
 			<td class = "tableDataCenter"><?php echo $AllData[$i]->UpdatedDate; ?></td>		
->>>>>>> 93b88a5c3417f823f031048038938d979cf6ae13
+-->
 			</tr>
 			<?php
 		}

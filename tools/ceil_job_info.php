@@ -64,9 +64,10 @@ textarea {
 	}
 	
 	function showImage() {
+
 		$("#imageResult").html("");
 		$("#action").val("getImageInfo");
-		$.post("../ajax/ceil_job.php",
+		$.post("../ajax/floor_job.php",
 			$('#form').serialize()
 		, 
 		function(data){		
@@ -152,6 +153,14 @@ textarea {
 	<div>
 	<select id = "Material" name = "Material" class = "ui-corner-all" style = "width:200px;">
 	<option value = "">Select Material</option>
+	<?php	
+		$AllData = $Loader->loadAllMaterial();
+		for($i =0;$i < count($AllData); $i++) {
+			?>
+			<option value  = "<?php echo $AllData[$i]->id ?>" ><?php echo $AllData[$i]->MaterialName ?></option>
+			<?php
+		}
+	?>
 	</select>
 	</div>
 	

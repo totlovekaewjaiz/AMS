@@ -92,7 +92,7 @@
 <th style = "width:80px;">แก้ไข่ล่าสุดเมื่อ</th>
 </tr>
 
-<tr>
+<tr onclick = "changePage( '12' )">
 <td class = "tableDataCenter">1</td>
 <td class = "Name">อาคารพญาไทยพลาซ่า</td>
 <td class = "tableDataCenter"></td>	
@@ -103,7 +103,7 @@
 <td class = "tableDataCenter">2014-05-21 23:45:42</td>	
 </tr>
 
-<tr class = 'tableRow'>
+<tr class = 'tableRow' onclick = "changePage( '13' )">
 <td class = "tableDataCenter">2</td>
 <td class = "Name">อาคารพญาไทยพลาซ่า</td>				
 <td class = "tableDataCenter"></td>
