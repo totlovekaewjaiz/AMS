@@ -59,6 +59,11 @@
 	
 </style>
 <script>
+$(document).ready(function(){
+	$('#printPDF').click(function(){
+		window.open('../report.php');
+	});
+});
 
 	function changePage( id ) {
 		showLoadingPopup();
@@ -77,6 +82,11 @@
 		$( "input[type=button],input[type=submit], a, button" ).button();
 		closePopup();
 	});
+	$(function() {
+	    $( "#datepicker1" ).datepicker();
+	    $( "#datepicker2" ).datepicker();
+	});
+ 
 </script>
 
 <div>
@@ -84,7 +94,10 @@
 <option>อาคารพญาไทยพลาซ่า</option>
 </select>
 </div>
-
+<p>
+	วันที่เริ่ม: <input type="text" id="datepicker1"> 
+	วันที่สิ้นสุด: <input type="text" id="datepicker2"> 
+	<input type="button" value="ค้นหา" class="button"/></p>
 <div>
 <table border = '1' style = "border-collapse:collapse;width:100%">
 <tr>
@@ -162,5 +175,5 @@
 </div>
 
 <div class = "addButton">
-<input type='button' value='พิมพ์หน้านี้' class = "button" />
+<input type='button' value='พิมพ์หน้านี้' class = "button" id="printPDF"/>
 </div>
