@@ -14,17 +14,19 @@
 		var $UpdatedBy;
 		var $UpdatedDate;
 		var $Status;
-		var $ProjectStatus;
+
+		var $wageDesc;
+		var $wagePrice;
 
 		var $MaterialList = array();
 		var $JobList = array();
 		
-		function __construct( $projectID , $db ){
+		function __construct( $ProjectID , $db ){
 			$this->db = $db;
-			$this->id = $projectID;
+			$this->id = $ProjectID;
 			$this->loadProjectInfo();
 		}
-		
+
 		
 		function loadProjectInfo() {
 			
@@ -43,8 +45,10 @@
 			$this->Start = $datas["Start"];
 			$this->End = $datas["End"];
 			$this->Status = $datas["Status"];
-			$this->ProjectStatus = $datas["ProjectStatus"];
-			
+			$this->wageDesc = $datas["wageDesc"];
+			$this->wagePrice = $datas["wagePrice"];
+
+
 			$this->CreatedBy = $datas["CreatedBy"];
 			$this->CreatedDate = $datas["CreatedDate"];
 			$this->UpdatedBy = $datas["UpdatedBy"];
@@ -67,38 +71,43 @@
 		function saveProject() {
 			
 			if(!empty($this->id)) {
-				
+					
 				$params = array();
-				
+
 				$sql = "UPDATE project SET 
-						ProjectName = ? , 
-						ProjectDescription = ? , 
-						`Start` = ? , 
-						`End` = ? ,  
-						UpdatedBy = ? ,
-						Status = ? ,
-						WHERE id = ? 
-						";
+							ProjectName = ? , 
+							ProjectDescription = ? , 
+							Start = ? , 
+							End = ? , 
+							UpdatedBy = ? ,
+				 			Status = ? ,
+				 			wageDesc = ? ,
+				 			wagePrice = ?
+						WHERE id = ?";
+
 				$params["ProjectName"] = $this->ProjectName;
 				$params["ProjectDescription"] = $this->ProjectDescription;
 				$params["Start"] = $this->Start;
 				$params["End"] = $this->End;
 				$params["UpdatedBy"] = $this->CreatedBy;
-				$params["ProjectStatus"] = $this->ProjectStatus;
+				$params["Status"] = $this->Status;
+				$params["wageDesc"] = $this->wageDesc;
+				$params["wagePrice"] = $this->wagePrice;
 				$params["id"] = $this->id;
-				
-				
+
 				$this->db->execute ( $sql , $params );
+	
 			} else {
 				$params = array();
 				$sql = "INSERT INTO project (id , ProjectName , ProjectDescription , `Start` , `End`  , CreatedBy , CreatedDate , UpdatedBy , UpdatedDate , Status)
-						VALUES (NULL , ? , ? , ? , ? , ? , NOW() , ? , NOW() , 'Y')";
+						VALUES (NULL , ? , ? , ? , ? , ? , NOW() , ? , NOW() , ?)";
 				$params["ProjectName"] = $this->ProjectName;
 				$params["ProjectDescription"] = $this->ProjectDescription;
 				$params["Start"] = $this->Start;
 				$params["End"] = $this->End;
 				$params["CreatedBy"] = $this->CreatedBy;
 				$params["UpdatedBy"] = $this->CreatedBy;
+				$params["Status"] = $this->Status;
 				
 				$this->db->execute ( $sql , $params );
 			}
@@ -107,10 +116,17 @@
 		
 		function deleteProject() {
 			
-			$sql = "UPDATE project SET Status = 'N' WHERE id = ? ";
+			/*$sql = "UPDATE project SET Status = 'N' WHERE id = ? ";
 			$params["id"] = $this->id;
 				
-			$this->db->execute ( $sql , $params );
+			$this->db->execute ( $sql , $params );*/
+
+			$params = array();
+
+			$sql = "DELETE FROM project WHERE id = ?";
+			$params["id"] = $this->id;
+			
+			$this->db->execute($sql , $params);
 		}
 		
 		function savePorjectMaterial() {
@@ -122,7 +138,7 @@
 			
 			foreach($this->MaterialList as $index => $MaterialID) {
 				$params = array();
-				$sql = "INSERT INTO project_material (id , ProjectID , MaterialID , CreatedBy , CreatedDate , UpdatedBy , 	UpdatedDate )
+				$sql = "INSERT INTO project_material (id , ProjectID , MaterialID , CreatedBy , CreatedDate , UpdatedBy , 	UpdatedDate  )
 						VALUES (NULL , ? , ? , ? , NOW() , ? , NOW())";
 				$params["id"] = $this->id;
 				$params["MaterialID"] = $MaterialID;

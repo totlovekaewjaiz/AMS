@@ -13,6 +13,31 @@
 		include("../tools/wall_job_info.php");
 	}
 	
+	if($action == "Save1"){
+		$JobID	=	$_POST['JobID'];
+		$WallID = $_POST['WallID'];
+		$ProjectID = $_POST['ProjectID'];
+		$JobName = $_POST['JobName'];
+		$Height = $_POST["Height"];
+		$Width = $_POST["Width"];
+		$Slot = $_POST["Slot"];
+
+		$Wall = new Wall('',$db);
+		$Wall->WallID = $WallID;
+		$Wall->JobID = $JobID;
+		$Wall->ProjectID = $ProjectID;
+		$Wall->JobName = $JobName;
+		$Wall->Height = $Height;
+		$Wall->Width = $Width;
+		$Wall->Slot = $Slot;
+		$Wall->CreatedBy = $Account->Username;
+
+
+		$Wall->saveWall();
+
+	}
+
+
 	if($action == "Save") {
 		
 		$id = $_POST["id"];

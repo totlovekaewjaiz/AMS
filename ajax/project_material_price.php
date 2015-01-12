@@ -11,12 +11,24 @@
 
 	if($action == "changePage") {
 		$ProjectID	=	$_POST['ProjectID'];
-		$Project 	= 	new materialP( $ProjectID , $db );
+		$MaterialInfo 	= 	new materialP( $ProjectID , $db );
+		$ProjectInfo 	= 	new Project( $ProjectID , $db );
 		include("../tools/project_material_price_info.php");
 		
 	}
 
 	
+	if($action == "save") {
+		$ProjectInfo = new Project( "" , $db );
+		
+		foreach($_POST as $index => $value) {
+			$ProjectInfo->$index = $value;
+		}
+		
+		$ProjectInfo->CreatedBy = $Account->Username;
+		
+		$ProjectInfo->saveProject();
+	}
 	
 /*	if($action == "loadMaterialInfo") {
 		

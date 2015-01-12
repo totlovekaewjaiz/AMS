@@ -38,60 +38,67 @@
 				include("../tools/project_material.php");
 				break;
 			case "MaterialPrice" :
-				//$AllData = $Loader->loadAllProject();
 				//include("../template/material_project.php");
-				//include("../template/project_material_price.php");
 				  include("../tools/project_material_price.php");
 				break;
 			case "JobProject" :
 				$AllData = $Loader->loadAllProject();
 				include("../tools/project_job.php");				
 				break;
-			case "RazeJob" :
-				//$AllData = $Loader->loadAllProject();
-				include("../template/raze_job.php");				
-				break;
-			case "MaterailEstimate" :
-				//include("../tools/material_estimate.php");
-				break;
-			case "MaterailPrice" :
-				//include("../tools/material_price.php");
-				break;
 			case "FloorJob" :
-				//$AllData = $Loader->loadAllFloorJob ();
-				//include("../tools/floor_job.php");
+				$AllData = $Loader->loadAllFloorJob();
 				include("../tools/floor_job.php");
 				break;
 			case "CeilJob" :
-				//$AllData = $Loader->loadAllCeilJob ();
-				//include("../tools/ceil_job.php");
+				$AllData = $Loader->loadAllCeilJob();
 				include("../tools/ceiling_job.php");
 				break;
-			case "WallStructureJob" :
-				//$AllData = $Loader->loadAllWallJob ();
-				//include("../tools/wall_job.php");
-				include("../template/wall_structure_job.php");
-				break;
 			case "WallFinishingJob" :
-				//$AllData = $Loader->loadAllWallJob ();
-				//include("../tools/wall_job.php");
+				$AllData = $Loader->loadAllWallJob();
 				include("../tools/wall_job.php");
-				break;
-			case "DoorJob" :
-				//include("../tools/furniture_job.php");
-				include("../template/door_job.php");
 				break;
 			case "UserAccount" :
 				$AllData = $Loader->loadAllAccount();
 				include("../tools/user_account.php");
 				break;
 			case "Report" :
-				//include("../tools/boq_report.php");
-				include("../template/project_boq.php");
+				$AllData = $Loader->loadAllProject1();
+				include("../tools/boq_report.php");
 				break;
 			default :
 				echo "<script>closePopup();</script>";
 				break;
+
+
+			/*case "RazeJob" :
+				//$AllData = $Loader->loadAllProject();
+				include("../template/raze_job.php");				
+				break;*/
+			//case "MaterailEstimate" :
+				//include("../tools/material_estimate.php");
+			//	break;
+			//case "MaterailPrice" :
+				//include("../tools/material_price.php");
+				//break;
+
+				//$AllData = $Loader->loadAllCeilJob ();
+				//include("../tools/ceil_job.php");
+				
+			// case "WallStructureJob" :
+			// 	//$AllData = $Loader->loadAllWallJob ();
+			// 	//include("../tools/wall_job.php");
+			// 	include("../template/wall_structure_job.php");
+			// 	break;
+			
+				//$AllData = $Loader->loadAllWallJob ();
+				//include("../tools/wall_job.php");
+				
+			// case "DoorJob" :
+			// 	//include("../tools/furniture_job.php");
+			// 	include("../template/door_job.php");
+			// 	break;
+			
+			
 				
 		}
 	}

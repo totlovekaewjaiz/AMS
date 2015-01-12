@@ -8,7 +8,11 @@
 	require("../class/material.php");
 	require("../class/project.php");
 	require("../class/materialP.php");
-	
+	require("../class/floor.php");
+	require("../class/ceil.php");
+	require("../class/wall.php");
+
+
 	session_start();
 	
 	$db = new Database();

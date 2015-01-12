@@ -29,7 +29,7 @@
 		function loadAllActiveProject() {
 			$Array = array();
 			$params = array();
-			$sql = "SELECT * FROM  project WHERE Status = 'Y' ";
+			$sql = "SELECT * FROM project WHERE Status = 'Y' ";
 			$resultArray = $this->db->select ( $sql , $params );
 			$numrows = $resultArray["numrows"];
 			$result = $resultArray["datas"];
@@ -213,31 +213,33 @@
 		function loadAllFloorJob () {
 			$Array = array();
 			$params = array();
-			$sql = "SELECT * FROM  job WHERE Status = 'Y' AND JobType = '1' ORDER BY ProjectID ASC , UpdatedDate DESC";
+			$sql = "SELECT * FROM job WHERE Status = 'Y' AND JobType = '2' ORDER BY ProjectID ASC";
 			$resultArray = $this->db->select ( $sql , $params );
 			$numrows = $resultArray["numrows"];
 			$result = $resultArray["datas"];
 			for($i =0;$i < $numrows ;$i++) {
 				$datas = mysql_fetch_array($result);
 				
-				$Array[$i]["id"] = $datas["id"];
-				$Array[$i]["JobName"] = $datas["JobName"];
-				$Array[$i]["Project"]  = new Project($datas["ProjectID"] , $this->db);
-				$Array[$i]["CreatedBy"] = $datas["CreatedBy"];
-				$Array[$i]["CreatedDate"] = $datas["CreatedDate"];
-				$Array[$i]["UpdatedBy"] = $datas["UpdatedBy"];
-				$Array[$i]["UpdatedDate"] = $datas["UpdatedDate"];
-			
+				$Array[$i]["id"] 			= $datas["id"];
+				$Array[$i]["ProjectID"]   	= $datas["ProjectID"];
+				$Array[$i]["JobName"]   	= $datas["JobName"];
+				$Array[$i]["JobDescription"]   	= $datas["JobDescription"];
+				$Array[$i]["Project"]   	= new Project($datas["ProjectID"] , $this->db);
+				$Array[$i]["CreatedBy"] 	= $datas["CreatedBy"];
+				$Array[$i]["CreatedDate"] 	= $datas["CreatedDate"];
+				$Array[$i]["UpdatedBy"] 	= $datas["UpdatedBy"];
+				$Array[$i]["UpdatedDate"] 	= $datas["UpdatedDate"];			
 			}
-			//======================
-				
+			//======================			
 			return $Array;
 		}
 		
+		
+
 		function loadAllWallJob () {
 			$Array = array();
 			$params = array();
-			$sql = "SELECT * FROM  job WHERE Status = 'Y' AND JobType = '2' ORDER BY ProjectID ASC , UpdatedDate DESC";
+			$sql = "SELECT * FROM  job WHERE Status = 'Y' AND JobType = '5' ORDER BY ProjectID ASC , UpdatedDate DESC";
 			$resultArray = $this->db->select ( $sql , $params );
 			$numrows = $resultArray["numrows"];
 			$result = $resultArray["datas"];
@@ -245,7 +247,9 @@
 				$datas = mysql_fetch_array($result);
 				
 				$Array[$i]["id"] = $datas["id"];
+				$Array[$i]["ProjectID"]   	= $datas["ProjectID"];
 				$Array[$i]["JobName"] = $datas["JobName"];
+				$Array[$i]["JobDescription"]   	= $datas["JobDescription"];
 				$Array[$i]["Project"]  = new Project($datas["ProjectID"] , $this->db);
 				$Array[$i]["CreatedBy"] = $datas["CreatedBy"];
 				$Array[$i]["CreatedDate"] = $datas["CreatedDate"];
@@ -261,7 +265,7 @@
 		function loadAllCeilJob () {
 			$Array = array();
 			$params = array();
-			$sql = "SELECT * FROM  job WHERE Status = 'Y' AND JobType = '3' ORDER BY ProjectID ASC , UpdatedDate DESC";
+			$sql = "SELECT * FROM  job WHERE Status = 'Y' AND JobType = '3' ORDER BY ProjectID ASC";
 			$resultArray = $this->db->select ( $sql , $params );
 			$numrows = $resultArray["numrows"];
 			$result = $resultArray["datas"];
@@ -269,7 +273,9 @@
 				$datas = mysql_fetch_array($result);
 				
 				$Array[$i]["id"] = $datas["id"];
+				$Array[$i]["ProjectID"]   	= $datas["ProjectID"];
 				$Array[$i]["JobName"] = $datas["JobName"];
+				$Array[$i]["JobDescription"]   	= $datas["JobDescription"];
 				$Array[$i]["Project"]  = new Project($datas["ProjectID"] , $this->db);
 				$Array[$i]["CreatedBy"] = $datas["CreatedBy"];
 				$Array[$i]["CreatedDate"] = $datas["CreatedDate"];
@@ -307,6 +313,27 @@
 			
 			$sql = "SELECT * FROM project_job_material WHERE ProjectID = ? ";
 		}
+
+
+		function loadWorkFloor($ProjectID) {
+			
+			$Array = array();
+			$params = array();
+			$sql = "SELECT * FROM  work_floor WHERE ProjectID = ? ";
+			$params["ProjectID"] = $ProjectID;			
+			$resultArray = $this->db->select ( $sql , $params );
+			$numrows = $resultArray["numrows"];
+			$result = $resultArray["datas"];
+			for($i =0;$i < $numrows ;$i++) {
+				$datas = mysql_fetch_array($result);
+				$Array[$i] = new Job($datas["id"] , $this->db);
+				
+			}
+			//======================
+				
+			return $Array;
+		}
+
 		
 	}
 ?>

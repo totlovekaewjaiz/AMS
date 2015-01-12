@@ -65,7 +65,7 @@
 		$.post("../ajax/project_job.php",
 				{ 
 					"action": "wall",
-					"ProjectID" : id
+					"JobID" : id
 				}
 		, 
 		function(data){
@@ -91,28 +91,49 @@
 <th style = "width:80px;">แก้ไขล่าสุดโดย</th>
 <th style = "width:80px;">แก้ไข่ล่าสุดเมื่อ</th>
 </tr>
+<?php
+	if(count($AllData) > 0 ) {
+	
+		for($i = 0; $i < count($AllData); $i++) {
+			
+			$No = $i + 1;
+			
+			if($i % 2 == 0) {
+				?>
+				<tr class = 'tableRow' onclick = "changePage('<?php echo $AllData[$i]['id']; ?>')" >
+				<?php
+			} else {
+				?>
+				<tr onclick = "changePage('<?php echo $AllData[$i]['id'];  ?>')">
+				<?php
+			}
+			?>
+	
 
-<tr onclick = "changePage( '12' )">
-<td class = "tableDataCenter">1</td>
-<td class = "Name">อาคารพญาไทยพลาซ่า</td>
-<td class = "tableDataCenter"></td>	
-<td class = "Name">ทาสีผนังทั่วไป</td>			
-<td class = "tableDataCenter">327</td>	
-<td class = "tableDataCenter">ตรม</td>	
-<td class = "tableDataCenter">Administrator</td>	
-<td class = "tableDataCenter">2014-05-21 23:45:42</td>	
+			<td class = "tableDataCenter"><? echo $No; ?></td>
+			<?php 
+				$query = "SELECT * FROM project WHERE id = ".$AllData[$i]['ProjectID']."";
+				$result = mysql_query($query);
+				$datas = mysql_fetch_array($result);
+			?>
+			<td class = "tableDataCenter"><?php echo $datas["ProjectName"]; ?></td>	
+			<td class = "tableDataCenter"><?php echo $AllData[$i]['JobName']; ?></td>	
+			<td class = "tableDataCenter"><?php echo $AllData[$i]['JobDescription']; ?></td>	
+			<td class = "tableDataCenter"><?php echo $i; ?></td>
+			<td class = "tableDataCenter"><?php echo $i; ?></td>
+			<td class = "tableDataCenter"><?php echo $AllData[$i]['UpdatedBy']; ?></td>
+			<td class = "tableDataCenter"><?php echo $AllData[$i]['UpdatedDate']; ?></td>
 </tr>
-
-<tr class = 'tableRow' onclick = "changePage( '13' )">
-<td class = "tableDataCenter">2</td>
-<td class = "Name">อาคารพญาไทยพลาซ่า</td>				
-<td class = "tableDataCenter"></td>
-<td class = "Name">ผนังกรุกระเบื้องขนาด 300x300 มม</td>
-<td class = "tableDataCenter">4</td>	
-<td class = "tableDataCenter">ตรม</td>	
-<td class = "tableDataCenter">Administrator</td>	
-<td class = "tableDataCenter">2014-05-21 23:45:32</td>	
-</tr>
+			<?php
+		}
+	} else {
+		?>
+		<tr class = 'tableRow'>
+		<td colspan = "8">No project found</td>
+		</tr>
+		<?php
+	}
+?>
 
 </table>
 </div>

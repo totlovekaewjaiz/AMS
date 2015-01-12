@@ -54,10 +54,14 @@ textarea {
 	}
 	
 	function save() {
+		
 		showLoadingPopup();
+		var status = $('#StatusProject').val()
 		$.post("../ajax/project.php",
+
 			$('#form').serialize()
-		, 
+		
+		, 	
 		function(data){
 			loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 		});
@@ -105,15 +109,19 @@ textarea {
 	<div>
 
 		Status :
-		<select name="StatusProject">
+		<select name="Status" id="Status">
+			<option>--- Choose ---</option>
 			<?
 			
 			    	if($ProjectInfo->Status == 'Y'){
 			    		echo '<option value="Y" selected="selected"> Available</option>';
 			    		echo '<option value="N" > UnAvailable</option>';
-			    	}else{
+			    	}else if($ProjectInfo->Status == 'N'){
 			    		echo '<option value="Y" > Available</option>';
 			    		echo '<option value="N" selected="selected"> UnAvailable</option>';
+			    	}else{
+			    		echo '<option value="Y" > Available</option>';
+			    		echo '<option value="N" > UnAvailable</option>';
 			    	}
 
 			    

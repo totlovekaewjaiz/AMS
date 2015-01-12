@@ -53,8 +53,8 @@ textarea {
 	
 	function save() {
 		showLoadingPopup();
-		$("#action").val("saveJobInfo");
-		$.post("../ajax/ceil_job.php",
+		$("#action").val("Save");
+		$.post("../ajax/ceilling_job.php",
 			$('#form').serialize()
 		, 
 		function(data){
@@ -64,13 +64,17 @@ textarea {
 	}
 	
 	function showImage() {
-
 		$("#imageResult").html("");
 		$("#action").val("getImageInfo");
-		$.post("../ajax/floor_job.php",
+		$.post("../ajax/ceilling_job.php",
 			$('#form').serialize()
 		, 
 		function(data){		
+			var success 	= data.split('Net Total material = ');
+			var str			= success[1];
+			var numberStr   = (str.length)-6;
+			var	result 		= str.substr(0,numberStr);
+			$('#ReserveValue').val(result);
 			$("#imageResult").html(data);
 		});
 	}	
@@ -116,8 +120,9 @@ textarea {
 	
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "getImageInfo" >
-	<input type = "hidden" id = "id" name = "id" value = "<?php echo $JobID; ?>" >	
+	<input type = "hidden" id = "JobID" name = "JobID" value = "<?php echo $JobID; ?>" >	
 	<input type = "hidden" id = "JobType" name = "JobType" value = "3" >	
+	<input type = "hidden" id = "CeilID" name = "CeilID" value = "<?php echo $CeilInfo->CeilID; ?>" >	
 	
 	<div style = "width:30%;height:auto;float:left;">
 	<div>Project</div>
@@ -138,26 +143,35 @@ textarea {
 	<div><input type = "text" id = "JobName" name = "JobName" value = "<?php echo $JobInfo->JobName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
 	
 	<div>Width</div>
-	<div><input type = "text" id = "Width" name = "Width" value = "<?php echo $JobInfo->FloorJobList["Width"]; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>		
+	<div><input type = "text" id = "widthEstimate" name = "widthEstimate" value = "<?php echo $CeilInfo->widthEstimate; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>		
 	
 	<div>Long</div>
-	<div><input type = "text" id = "Long" name = "Long" value = "<?php echo $JobInfo->FloorJobList["Long"]; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>
+	<div><input type = "text" id = "longEstimate" name = "longEstimate" value = "<?php echo $CeilInfo->longEstimate; ?> "  style = "width:200px;" class = "ui-corner-all"  ></div>
 	
 	<div>Start Point X</div>
-	<div><input type = "text" id = "StartX" name = "StartX" value = "<?php echo $JobInfo->FloorJobList["StartX"]; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>	
+	<div><input type = "text" id = "StartPointX" name = "StartPointX" value = " <?php echo $CeilInfo->StartPointX; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>	
 	
 	<div>Start Point Y</div>
-	<div><input type = "text" id = "StartY" name = "StartY" value = "<?php echo $JobInfo->FloorJobList["StartY"]; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>	
+	<div><input type = "text" id = "StartPointY" name = "StartPointY" value = "<?php echo $CeilInfo->StartPointY; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>	
 	
 	<div>Material</div>
 	<div>
-	<select id = "Material" name = "Material" class = "ui-corner-all" style = "width:200px;">
+	<select id = "MaterialID" name = "MaterialID" class = "ui-corner-all" style = "width:200px;">
 	<option value = "">Select Material</option>
 	<?php	
 		$AllData = $Loader->loadAllMaterial();
 		for($i =0;$i < count($AllData); $i++) {
+			if($AllData[$i]->id == $CeilInfo->MaterialID){
 			?>
-			<option value  = "<?php echo $AllData[$i]->id ?>" ><?php echo $AllData[$i]->MaterialName ?></option>
+			<option value  = "<?php echo $AllData[$i]->id ?>" selected="selected" ><?php echo $AllData[$i]->MaterialName ?></option>
+			<?php
+			}else{
+			?>
+				<option value  = "<?php echo $AllData[$i]->id ?>" ><?php echo $AllData[$i]->MaterialName ?></option>
+			<?php 
+			}
+			?>
+			
 			<?php
 		}
 	?>
@@ -165,39 +179,25 @@ textarea {
 	</div>
 	
 	<div>ObjectWall</div>
-	<div><input type = "text" id = "ObjectWall" name = "ObjectWall" value = "<?php echo $JobInfo->FloorJobList["ObjectWall"]; ?>"  style = "width:200px;" class = "ui-corner-all" onblur = "loadObjectDetailInfo()"></div>	
+	<div><input type = "text" id = "ObjectWall" name = "ObjectWall" value = "<?php echo $CeilInfo->ObjectWall; ?>"  style = "width:200px;" class = "ui-corner-all" onblur = "loadObjectDetailInfo()"></div>	
 	
 	<div id = "ObjectDetail">
-	<?php
-		for($i =0;$i < $JobInfo->FloorJobList["ObjectWall"] ;$i++) {
-			?>
-			<div>Object Width</div>
-			<div><input type = "text" name = "ObjectWidth[]" value = "<?php echo $JobInfo->FloorJobList["ObjectWidth"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all" ></div>		
-			<div>Object Long</div>
-			<div><input type = "text" name = "ObjectLong[]" value = "<?php echo $JobInfo->FloorJobList["ObjectLong"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all" ></div>
-			<div>Object Location X</div>
-			<div><input type = "text" name = "ObjectX[]" value = "<?php echo $JobInfo->FloorJobList["ObjectX"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all" ></div>
-			<div>Object Location Y</div>
-			<div><input type = "text" name = "ObjectY[]" value = "<?php echo $JobInfo->FloorJobList["ObjectY"][$i]; ?>"  style = "width:200px;" class = "ui-corner-all" ></div>
-			<?php
-		}
-	?>
+	
 	</div>
-	
-	
+	<div>Reserve ( % )</div>
+	<div><input type="input" style = "width:200px;" class = "ui-corner-all" name="ReservePercent" id="ReservePercent" value="<?php echo $CeilInfo->ReservePercent; ?>"/></div>
+	<div>Reserve ( Value )</div>
+	<div><input type="input" style = "width:200px;" class = "ui-corner-all" name="ReserveValue" id="ReserveValue" value="<?php echo $CeilInfo->ReserveValue; ?>"/></div>
 	</div>
 	<div style = "width:70%;height:500px;float:left;overflow:auto;">
 	<div id = "imageResult">
-	<?php
-		if(!empty($JobInfo->JobName)) {		
-			?>
-			<div><img src = '../resource/image/<?php echo $JobInfo->JobName.".png?".rand(0,32000); ?>' /></div>
-			<input type = "hidden" name = "MaterialAmount" value = "">
-			<div>Total material = <?php echo $JobInfo->FloorJobList["MaterialAmount"]; ?></div>
-			<?php
+	<?php 
+		if($CeilInfo->CeilID){
+			include_once('ShowImgCeil.php');
 		}
 	?>
 	</div>
+
 	</div>
 	
 	<div>

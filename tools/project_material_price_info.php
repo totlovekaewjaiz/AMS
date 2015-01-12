@@ -77,8 +77,21 @@ textarea {
 	}
 	
 	function save() {
+
+		var ProjectID = $('#ProjectID').val();
+
 		showLoadingPopup();
-		loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
+		$.post("../ajax/project.php",
+			$('#form').serialize()
+		, 
+		function(data){
+		//	$("#menu_content").html(data);
+			loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
+		});
+
+
+		
+		
 	}
 	
 	function showSelectIcon() {
@@ -97,11 +110,15 @@ textarea {
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "Save" >
 <!--
-	<input type = "hidden" id = "id" name = "id" value = "<? echo $Project->id; ?>" >	
+	<input type = "hidden" id = "lop3;" name = "id" value = "<? echo $Project->id; ?>" >	
 
 -->
-	<input type = "hidden" id = "id" name = "id" value = "<?php echo $MaterialID; ?>" >	
-		
+	<input type = "hidden" id = "id" name = "id" value = "<?php echo $MaterialInfo->id; ?>" >
+	<input type = "hidden" id = "ProjectName" name = "ProjectName" value = "<?php echo $ProjectInfo->ProjectName; ?>" >
+	<input type = "hidden" id = "ProjectDescription" name = "ProjectDescription" value = "<?php echo $ProjectInfo->ProjectDescription; ?>" >
+	<input type = "hidden" id = "Start" name = "Start" value = "<?php echo $ProjectInfo->Start; ?>" >
+	<input type = "hidden" id = "End" name = "End" value = "<?php echo $ProjectInfo->End; ?>" >
+	<input type = "hidden" id = "Status" name = "Status" value = "<?php echo $ProjectInfo->Status; ?>" >
 
 	<table border = '1' style = "border-collapse:collapse;width:80%">
 		<tr>
@@ -112,12 +129,11 @@ textarea {
 		<th>ราคา</th>
 		</tr>
 <?
-
-	if(count($Project) > 0 ) {
+	if(count($MaterialInfo) > 0 ) {
 		
-		for($i = 0; $i < count($Project->MaterialID); $i++) {
+		for($i = 0; $i < count($MaterialInfo->MaterialID); $i++) {
 
-				$query = "SELECT * FROM material WHERE id = ".$Project->MaterialID[$i];			  
+				$query = "SELECT * FROM material WHERE id = ".$MaterialInfo->MaterialID[$i];			  
 			    $result = mysql_query($query);
 			    while($datas = mysql_fetch_array($result)){			 
 			
@@ -127,26 +143,51 @@ textarea {
 
 					$MaterialType = $datas1["type_name"];
 
+   
+			
+			
+			$query1 = "SELECT * FROM work_floor WHERE MaterialID = ".$datas["id"];
+			$query2 = "SELECT * FROM work_ceil WHERE MaterialID = ".$datas["id"];
+			$query3 = "SELECT * FROM work_wall WHERE MaterialID = ".$datas["id"];
 
+			if($query1){
+				$result2 = mysql_query($query1);
+				$datas2 = mysql_fetch_array($result2);
+			}
+			
+			if($query2){
+				$result3 = mysql_query($query2);
+				$datas3 = mysql_fetch_array($result3);
+			}
+
+			if($query3){
+				$result4 = mysql_query($query3);
+				$datas4 = mysql_fetch_array($result4);
+			}
 
 ?>
-			<tr>
+
+	<tr>
 				<td><? echo $datas["MaterialCode"] ?></td>
 				<td>
 				<div style = "height:20px;"><? echo $datas["MaterialName"] ?></div>
 				<div style = "padding-left:20px;height:20px;"><? echo  $MaterialType;?></div>
 				</td>
 				<td style = "text-align:center;">
-				<div style = "height:20px;"><? echo $datas["MaterialWidth"] ?></div>
-				<div style = "height:20px;"><? echo $datas["MaterialHeight"] ?></div>
+				<div style = "height:20px;"><?php echo $datas3["widthEstimate"];?>
+											<?php echo $datas2["widthEstimate"];?>
+											<?php echo $datas4["Width"];?>
+				</div>
+				<div style = "height:20px;"><? echo $datas2["longEstimate"]; ?><? echo $datas3["longEstimate"]; ?><? echo $datas4["Height"]; ?></div>
 				</td>
 				<td style = "text-align:center;">
-				<div style = "height:20px;">456</div>
-				<div style = "height:20px;">456</div>
+				<div style = "height:20px;"></div>
+				<div style = "height:20px;"><? echo $datas2['ReserveValue']; ?><? echo $datas3['ReserveValue']; ?><? echo $datas4['Slot']; ?></div>
 				</td>
-				<td><input type = "textbox" style = "width:100px;"></td>
+				<td><div style = "height:20px;"></div></td>
 			</tr>
-	<?
+<?php
+	
 		}
 	}
 		?>
@@ -154,28 +195,18 @@ textarea {
 	<td></td>
 	<td>
 	<div style = "height:20px;">ค่าแรง</div>
-	<div style = "padding-left:20px;height:20px;">รื้อถอนประตู</div>
-	<div style = "padding-left:20px;height:20px;">ปูพื้นไวนิล</div>
-	<div style = "padding-left:20px;height:20px;">ฝ้าโครงเคร่าเหล็ก</div>
-	<div style = "padding-left:20px;height:20px;">ปูพรม</div>
+	<textarea cols=30 rows=5 name="wageDesc" id="wageDesc"><?php echo $ProjectInfo->wageDesc; ?></textarea>
 	</td>
 	<td></td>
 	<td></td>
 	<td>
-	<div style = "height:20px;">60000</div>
-	<div><input type = "textbox" style = "width:100px;" value=  "20000"></div>
-	<div><input type = "textbox" style = "width:100px;" value=  "20000"></div>
-	<div><input type = "textbox" style = "width:100px;" value=  "20000"></div>
+	<div><input type = "textbox" style = "width:100px;" value="<? echo $ProjectInfo->wagePrice; ?>" name="wagePrice" id="wagePrice"></div>
 	</td>
 	</tr>
 	<?
 		
 	}
 ?>
-
-
-
-
 
 	</table>
 	

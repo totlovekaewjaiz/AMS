@@ -10,6 +10,8 @@
 		$JobID = $_POST["id"];
 		$JobInfo = new Job($JobID , $db);
 		$ProjectArray = $Loader->loadAllActiveProject();
+
+
 		
 		include("../tools/floor_job_info.php");
 	}
@@ -45,6 +47,40 @@
 			<?
 		}
 	}
+
+	if($action == "Save") {
+		$FloorID    = $_POST['FloorID'];
+		$JobID = $_POST["JobID"];	
+		$ProjectID = $_POST['ProjectID'];
+		$JobName = $_POST["JobName"];
+		$widthEstimate = $_POST['widthEstimate'];
+		$longEstimate = $_POST['longEstimate'];
+		$StartPointX  = $_POST['StartPointX'];
+		$StartPointY = $_POST['StartPointY'];
+		$MaterialID = $_POST['MaterialID'];
+		$ObjectWall = $_POST['ObjectWall'];
+		$ReservePercent = $_POST['ReservePercent'];
+		$ReserveValue = $_POST['ReserveValue'];
+		$type = $_POST['JobType'];
+
+		$Floor = new Floor( "" , $db);
+		$Floor->FloorID = $FloorID;
+		$Floor->JobID = $JobID;
+		$Floor->ProjectID = $ProjectID;
+		$Floor->JobName = $JobName;
+		$Floor->widthEstimate = $widthEstimate;
+		$Floor->longEstimate = $longEstimate;
+		$Floor->StartPointX = $StartPointX;
+		$Floor->StartPointY = $StartPointY;
+		$Floor->MaterialID = $MaterialID;
+		$Floor->ObjectWall = $ObjectWall;
+		$Floor->ReservePercent = $ReservePercent;
+		$Floor->ReserveValue = $ReserveValue;
+		$Floor->CreatedBy = $Account->Username;
+
+		$Floor->saveFloor();
+	}
+	
 	
 	if($action == "saveJobInfo") {
 		$id = $_POST["id"];
@@ -94,16 +130,16 @@
 		
 		$ProjectID = $_POST["ProjectID"];
 		$JobName = $_POST["JobName"];
-		$Material = $_POST["Material"];
+		$Material = $_POST["MaterialID"];
 		
 		$Tile = new Material($Material , $db);
 		$MaterialX = $Tile->MaterialWidth;
 		$MaterialY = $Tile->MaterialHeight;
 		
-		$Long = $_POST["Long"];
-		$Width = $_POST["Width"];
-		$StartX = $_POST["StartX"];
-		$StartY = $_POST["StartY"];
+		$Long = $_POST["longEstimate"];
+		$Width = $_POST["widthEstimate"];
+		$StartX = $_POST["StartPointX"];
+		$StartY = $_POST["StartPointY"];
 		
 		$ObjectWall = $_POST["ObjectWall"];
 		$ObjectWidth = $_POST["ObjectWidth"];
@@ -124,7 +160,7 @@
 		$ImageArray[] = $Width + $ShiftPointStart;
 		$ImageArray[] = $ShiftPointStart;
 		
-		$reserve  = $_POST['reserve'];
+		$reserve  = $_POST['ReservePercent'];
 		
 		// Create a blank image
 		$image = imagecreatetruecolor($Width + $ShiftPointStart + $ShiftPointStart , $Long + $ShiftPointStart + $ShiftPointStart);
@@ -349,6 +385,7 @@
 		imagepng($image , "../resource/image/$JobName.png");
 		imagedestroy($image);
 		
+
 		echo "<div><img src = '../resource/image/$JobName.png?".rand(0,32000)."' /></div>";
 		echo "<input type = 'hidden' name = 'MaterialAmount' value = '$MaterialCount'>";
 		echo "<div>Total material = $MaterialCount</div>";

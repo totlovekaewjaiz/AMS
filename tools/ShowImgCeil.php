@@ -1,0 +1,266 @@
+<?php
+		$ShiftPointStart = 50;		
+		
+		$ProjectID = $_POST["ProjectID"];
+		$JobName = $_POST["JobName"];
+		$Material = $CeilInfo->MaterialID;
+		
+		$Tile = new Material($Material , $db);
+		$MaterialX = $Tile->MaterialWidth;
+		$MaterialY = $Tile->MaterialHeight;
+		
+		$Long = $CeilInfo->longEstimate;
+		$Width = $CeilInfo->widthEstimate;
+		$StartX = $CeilInfo->StartPointX;
+		$StartY = $CeilInfo->StartPointY;
+		
+		$ObjectWall = $CeilInfo->ObjectWall;
+		$ObjectWidth = $_POST["ObjectWidth"];
+		$ObjectLong = $_POST["ObjectLong"];
+		$ObjectX = $_POST["ObjectX"];
+		$ObjectY = $_POST["ObjectY"];
+		
+		
+		$ImageArray[] = $ShiftPointStart;
+		$ImageArray[] = $ShiftPointStart;
+		
+		$ImageArray[] = $ShiftPointStart;
+		$ImageArray[] = $Long + $ShiftPointStart;
+		
+		$ImageArray[] = $Width + $ShiftPointStart;
+		$ImageArray[] = $Long + $ShiftPointStart;
+		
+		$ImageArray[] = $Width + $ShiftPointStart;
+		$ImageArray[] = $ShiftPointStart;
+		
+		$reserve  = $CeilInfo->ReservePercent;
+		
+		// Create a blank image
+		$image = imagecreatetruecolor($Width + $ShiftPointStart + $ShiftPointStart , $Long + $ShiftPointStart + $ShiftPointStart);
+		// Allocate a color for the polygon
+		$red = imagecolorallocate($image, 255, 0, 0);
+		$white = imagecolorallocate($image, 255, 255, 255);
+		$black = imagecolorallocate($image, 0, 0, 0);
+		$arial = '../font/arial.ttf';
+		
+		$point = ceil(count($ImageArray)/2);
+		// Draw the polygon		
+		imagefilledpolygon($image, $ImageArray, $point, $red);
+		
+		$ObjectStorage = array();
+		
+		for($i = 0;$i < $ObjectWall ;$i++) {
+			$ObjectWallArray = array();
+			
+			$ObjectWallArray[] = $ObjectX[$i]+ $ShiftPointStart;
+			$ObjectWallArray[] = $ObjectY[$i]+ $ShiftPointStart;
+			
+			$ObjectWallArray[] = $ObjectX[$i] + $ObjectWidth[$i]+ $ShiftPointStart;
+			$ObjectWallArray[] = $ObjectY[$i] + $ShiftPointStart;
+			
+			$ObjectWallArray[] = $ObjectX[$i] + $ObjectWidth[$i] + $ShiftPointStart;
+			$ObjectWallArray[] = $ObjectY[$i] + $ObjectLong[$i] + $ShiftPointStart;
+			
+			$ObjectWallArray[] = $ObjectX[$i] + $ShiftPointStart;
+			$ObjectWallArray[] = $ObjectY[$i] + $ObjectLong[$i] + $ShiftPointStart;
+			
+			$ObjectStorage[$i]["StartX"] = $ObjectX[$i];
+			$ObjectStorage[$i]["StartY"] = $ObjectY[$i];
+			$ObjectStorage[$i]["Width"] = $ObjectWidth[$i];
+			$ObjectStorage[$i]["Long"] = $ObjectLong[$i];
+			
+			//print_r($ObjectWallArray);
+			imagefilledpolygon($image, $ObjectWallArray, $point, $white);
+		}
+		
+		imagefill($image, 0, 0, $white);
+		//$image = ImageFlip ( $image, 1 );
+		
+		$MaterialCount = 0;
+		
+		
+		$PointX = $StartX + $ShiftPointStart;
+		while($PointX < $Width + $ShiftPointStart +  $MaterialX) {		
+			imageline( $image ,  $PointX,  0  ,  $PointX ,  $Long + $ShiftPointStart + $ShiftPointStart ,  $black );
+			//imagettftext($image, 6, 0, $PointX + 2  , $Long + $ShiftPointStart  + 20, $black , $arial, $PointX);
+			
+			$PointY = $StartY + $ShiftPointStart;
+			while($PointY < $Long + $ShiftPointStart +  $MaterialY) {		
+				imageline( $image ,  $PointX ,  $PointY  ,  $PointX + $MaterialX ,  $PointY  ,  $black );				
+				
+				if($PointY <= $Long + $ShiftPointStart && $PointX < $Width + $ShiftPointStart ) {
+					$MaterialCount++;
+				}
+				
+				$PointY+= $MaterialY;	
+				
+				if($PointY == $Long + $ShiftPointStart +  $MaterialY && $PointX < $Width + $ShiftPointStart) {
+					$MaterialCount--;
+				}
+			}
+			
+			$PointY = $StartY + $ShiftPointStart;
+			while($PointY >  $ShiftPointStart -  $MaterialY) {		
+				imageline( $image ,  $PointX ,  $PointY  ,  $PointX + $MaterialX ,  $PointY  ,  $black );
+				
+				if($PointY >= $ShiftPointStart && $PointX < $Width + $ShiftPointStart) {
+					$MaterialCount++;
+				}
+				
+				$PointY-= $MaterialY;
+				
+				if($PointY == $ShiftPointStart -  $MaterialY && $PointX < $Width + $ShiftPointStart) {
+					$MaterialCount--;
+				}				
+			}				
+			$PointX+= $MaterialX;			
+		}
+		
+		
+		$PointX = $StartX + $ShiftPointStart;
+		while($PointX >  $ShiftPointStart -  $MaterialX) {		
+			imageline( $image ,  $PointX,  0  ,  $PointX ,  $Long + $ShiftPointStart + $ShiftPointStart ,  $black );
+			
+			$PointY = $StartY + $ShiftPointStart;
+			while($PointY < $Long + $ShiftPointStart +  $MaterialY) {		
+				imageline( $image ,  $PointX ,  $PointY  ,  $PointX - $MaterialX ,  $PointY  ,  $black );								
+				if($PointY <= $Long + $ShiftPointStart && $PointX > $ShiftPointStart ) {
+					$MaterialCount++;
+				}
+				$PointY+= $MaterialY;	
+				if($PointY == $Long + $ShiftPointStart +  $MaterialY && $PointX > $ShiftPointStart) {
+					$MaterialCount--;
+				}
+			}			
+			$PointY = $StartY + $ShiftPointStart;
+			while($PointY >  $ShiftPointStart -  $MaterialY) {		
+				imageline( $image ,  $PointX ,  $PointY  ,  $PointX - $MaterialX ,  $PointY  ,  $black );
+				if($PointY >=  $ShiftPointStart && $PointX > $ShiftPointStart) {
+					$MaterialCount++;
+				}
+				$PointY-= $MaterialY;
+				if($PointY == $ShiftPointStart -  $MaterialY && $PointX > $ShiftPointStart) {
+					$MaterialCount--;
+				}
+			}
+			$PointX-= $MaterialX;
+		}
+		
+				
+		for($i = 0;$i < count($ObjectStorage) ;$i++) {			
+			
+			$StartObjX = ceil($ObjectStorage[$i]["StartX"] / $MaterialX);
+			if($StartX > 0) {
+				$PointX =  ($StartObjX * $MaterialX) + $StartX + $ShiftPointStart - $MaterialX;
+			} else {
+				$PointX =  ($StartObjX * $MaterialX) + $StartX + $ShiftPointStart;
+			}
+			
+			while($PointX <= $ObjectStorage[$i]["StartX"] + $ObjectStorage[$i]["Width"] + $ShiftPointStart +  $MaterialX) {						
+			
+				$StartObjY = ceil($ObjectStorage[$i]["StartY"] / $MaterialY);
+				if($StartY > 0) {
+					$PointY = ($StartObjY * $MaterialY) + $StartY + $ShiftPointStart - $MaterialY;
+				} else {
+					$PointY = ($StartObjY * $MaterialY) + $StartY + $ShiftPointStart;
+				}
+				
+				while($PointY < $ObjectStorage[$i]["StartY"] +  $ObjectStorage[$i]["Long"] + $ShiftPointStart +  $MaterialY) {								
+					//echo "[ $PointX , $PointY ] ";										
+					
+					if(	
+						$PointY + $MaterialY <= $ObjectStorage[$i]["StartY"] + $ObjectStorage[$i]["Long"] + $ShiftPointStart && 
+						$PointX + $MaterialX <= $ObjectStorage[$i]["StartX"] +  $ObjectStorage[$i]["Width"] + $ShiftPointStart && 
+						$PointY >= $ObjectStorage[$i]["StartY"] + $ShiftPointStart &&
+						$PointX >= $ObjectStorage[$i]["StartX"] + $ShiftPointStart 
+					) {												
+						$MaterialCount--;
+						//echo " Decrease Material 1";											
+					} else 
+					if( 
+						$PointY + $MaterialY >= $ObjectStorage[$i]["StartY"] + $ShiftPointStart && 
+						$PointX + $MaterialX >= $ObjectStorage[$i]["StartX"] + $ShiftPointStart &&
+						$PointY <=  $ShiftPointStart &&
+						$PointX <=  $ShiftPointStart 
+					){
+						$MaterialCount--;
+						//echo " Decrease Material 2";	
+					} else 
+					if( 
+						$PointY + $MaterialY >= $ObjectStorage[$i]["StartY"] + $ShiftPointStart && 
+						$PointX + $MaterialX >= $ObjectStorage[$i]["StartX"] + $ShiftPointStart &&
+						$PointY >  $ShiftPointStart &&
+						$PointY + $MaterialY <=  $ObjectStorage[$i]["StartY"] + $ObjectStorage[$i]["Long"] + $ShiftPointStart &&
+						$PointX <=  $ShiftPointStart 
+					){
+						$MaterialCount--;
+						//echo " Decrease Material 3";	
+					} else 
+					if( 
+						$PointY + $MaterialY >= $ObjectStorage[$i]["StartY"] + $ShiftPointStart && 
+						$PointX + $MaterialX >= $ObjectStorage[$i]["StartX"] + $ShiftPointStart &&
+						$PointY <=  $ShiftPointStart &&						
+						$PointX >  $ShiftPointStart &&
+						$PointX + $MaterialX <=  $ObjectStorage[$i]["StartX"] + $ObjectStorage[$i]["Width"] + $ShiftPointStart 
+					){
+						$MaterialCount--;
+						//echo " Decrease Material 4";	
+					} else 
+					if(	
+						$PointY < $ObjectStorage[$i]["StartY"] + $ObjectStorage[$i]["Long"] + $ShiftPointStart && 
+						$PointX < $ObjectStorage[$i]["StartX"] +  $ObjectStorage[$i]["Width"] + $ShiftPointStart && 
+						$PointY + $MaterialY > $ObjectStorage[$i]["StartY"] + $ObjectStorage[$i]["Long"] + $ShiftPointStart && 
+						$PointX + $MaterialX > $ObjectStorage[$i]["StartX"] +  $ObjectStorage[$i]["Width"] + $ShiftPointStart &&
+						$PointY + $MaterialY > $Long + $ShiftPointStart && 
+						$PointX + $MaterialX > $Width + $ShiftPointStart &&
+						$ObjectStorage[$i]["StartY"] + $ObjectStorage[$i]["Long"] == $Long &&
+						$ObjectStorage[$i]["StartX"] + $ObjectStorage[$i]["Width"] == $Width 
+					) {												
+						$MaterialCount--;
+						//echo " Decrease Material 5";											
+					} else 
+					if(	
+						$PointY < $ObjectStorage[$i]["StartY"] + $ObjectStorage[$i]["Long"] + $ShiftPointStart && 
+						$PointX >= $ObjectStorage[$i]["StartX"] + $ShiftPointStart && 
+						$PointY + $MaterialY > $ObjectStorage[$i]["StartY"] + $ObjectStorage[$i]["Long"] + $ShiftPointStart &&
+						$PointX + $MaterialX < $ObjectStorage[$i]["StartX"] +  $ObjectStorage[$i]["Width"] + $ShiftPointStart &&
+						$PointY + $MaterialY > $Long + $ShiftPointStart &&
+						$ObjectStorage[$i]["StartY"] + $ObjectStorage[$i]["Long"] == $Long 
+					) {												
+						$MaterialCount--;
+						//echo " Decrease Material 6";											
+					} else 
+					if(	
+						$PointY >= $ObjectStorage[$i]["StartY"] + $ShiftPointStart && 
+						$PointX < $ObjectStorage[$i]["StartX"] +  $ObjectStorage[$i]["Width"] + $ShiftPointStart && 
+						$PointY + $MaterialY < $ObjectStorage[$i]["StartY"] + $ObjectStorage[$i]["Long"] + $ShiftPointStart && 
+						$PointX + $MaterialX > $ObjectStorage[$i]["StartX"] +  $ObjectStorage[$i]["Width"] + $ShiftPointStart &&
+						$PointX + $MaterialX > $Width + $ShiftPointStart &&
+						$ObjectStorage[$i]["StartX"] + $ObjectStorage[$i]["Width"] == $Width 
+						
+					) {												
+						$MaterialCount--;
+						//echo " Decrease Material 7";											
+					}
+					
+					//echo "<br/>";
+					
+					$PointY+= $MaterialY;
+				}
+				
+				$PointX+= $MaterialX;
+			}			
+		}
+		
+		$net = $MaterialCount+($reserve/100);
+		$ceil = ceil($net);
+		
+		imagepng($image , "../resource/image/$JobName.png");
+		imagedestroy($image);
+		
+		echo "<div><img src = '../resource/image/$JobName.png?".rand(0,32000)."' /></div>";
+		echo "<input type = 'hidden' name = 'MaterialAmount' value = '$MaterialCount'>";
+		echo "<div>Total material = $MaterialCount</div>";
+		echo "<div>Reserve material = $net</div>";
+		echo "<div>Net Total material = $ceil</div>";
+?>

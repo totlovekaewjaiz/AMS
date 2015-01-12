@@ -53,7 +53,7 @@ textarea {
 	
 	function save() {
 		showLoadingPopup();
-		$("#action").val("saveJobInfo");
+		$("#action").val("Save");
 		$.post("../ajax/floor_job.php",
 			$('#form').serialize()
 		, 
@@ -69,7 +69,12 @@ textarea {
 		$.post("../ajax/floor_job.php",
 			$('#form').serialize()
 		, 
-		function(data){		
+		function(data){	
+			var success 	= data.split('Net Total material = ');
+			var str			= success[1];
+			var numberStr   = (str.length)-6;
+			var	result 		= str.substr(0,numberStr);
+			$('#ReserveValue').val(result);
 			$("#imageResult").html(data);
 		});
 	}	
@@ -110,14 +115,19 @@ textarea {
 	}
 
 </script>
-
+<?php 
+	/*echo '<pre>';
+	print_r($FloorInfo);
+	echo '</pre>';*/
+?>
 <div class = "ConfigContent" style = "padding:10px;">
-	
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "getImageInfo" >
-	<input type = "hidden" id = "id" name = "id" value = "<?php echo $JobID; ?>" >	
+	<input type = "hidden" id = "JobID" name = "JobID" value = "<?php echo $JobID; ?>" >	
 	<input type = "hidden" id = "JobType" name = "JobType" value = "1" >	
-	
+	<input type = "hidden" id = "FloorID" name = "FloorID" value = "<?php echo $FloorInfo->FloorID; ?>" >	
+
+
 	<div style = "width:30%;height:auto;float:left;">
 	<div>Project</div>
 	<div>
@@ -137,26 +147,35 @@ textarea {
 	<div><input type = "text" id = "JobName" name = "JobName" value = "<?php echo $JobInfo->JobName; ?>"  style = "width:200px;" class = "ui-corner-all"></div>		
 	
 	<div>Width</div>
-	<div><input type = "text" id = "Width" name = "Width" value = " "  style = "width:200px;" class = "ui-corner-all"  ></div>		
+	<div><input type = "text" id = "widthEstimate" name = "widthEstimate" value = "<?php echo $FloorInfo->widthEstimate; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>		
 	
 	<div>Long</div>
-	<div><input type = "text" id = "Long" name = "Long" value = " "  style = "width:200px;" class = "ui-corner-all"  ></div>
+	<div><input type = "text" id = "longEstimate" name = "longEstimate" value = "<?php echo $FloorInfo->longEstimate; ?> "  style = "width:200px;" class = "ui-corner-all"  ></div>
 	
 	<div>Start Point X</div>
-	<div><input type = "text" id = "StartX" name = "StartX" value = " "  style = "width:200px;" class = "ui-corner-all"  ></div>	
+	<div><input type = "text" id = "StartPointX" name = "StartPointX" value = " <?php echo $FloorInfo->StartPointX; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>	
 	
 	<div>Start Point Y</div>
-	<div><input type = "text" id = "StartY" name = "StartY" value = ""  style = "width:200px;" class = "ui-corner-all"  ></div>	
+	<div><input type = "text" id = "StartPointY" name = "StartPointY" value = "<?php echo $FloorInfo->StartPointY; ?>"  style = "width:200px;" class = "ui-corner-all"  ></div>	
 	
 	<div>Material</div>
 	<div>
-	<select id = "Material" name = "Material" class = "ui-corner-all" style = "width:200px;">
+	<select id = "MaterialID" name = "MaterialID" class = "ui-corner-all" style = "width:200px;">
 	<option value = "">Select Material</option>
 	<?php	
 		$AllData = $Loader->loadAllMaterial();
 		for($i =0;$i < count($AllData); $i++) {
+			if($AllData[$i]->id == $FloorInfo->MaterialID){
 			?>
-			<option value  = "<?php echo $AllData[$i]->id ?>" ><?php echo $AllData[$i]->MaterialName ?></option>
+			<option value  = "<?php echo $AllData[$i]->id ?>" selected="selected" ><?php echo $AllData[$i]->MaterialName ?></option>
+			<?php
+			}else{
+			?>
+				<option value  = "<?php echo $AllData[$i]->id ?>" ><?php echo $AllData[$i]->MaterialName ?></option>
+			<?php 
+			}
+			?>
+			
 			<?php
 		}
 	?>
@@ -164,18 +183,23 @@ textarea {
 	</div>
 	
 	<div>ObjectWall</div>
-	<div><input type = "text" id = "ObjectWall" name = "ObjectWall" value = ""  style = "width:200px;" class = "ui-corner-all" onblur = "loadObjectDetailInfo()"></div>	
+	<div><input type = "text" id = "ObjectWall" name = "ObjectWall" value = "<?php echo $FloorInfo->ObjectWall; ?>"  style = "width:200px;" class = "ui-corner-all" onblur = "loadObjectDetailInfo()"></div>	
 	
 	<div id = "ObjectDetail">
 	
 	</div>
 	<div>Reserve ( % )</div>
-	<div><input type="input" style = "width:200px;" class = "ui-corner-all" name="reserve" id="reserve" value=""/></div>
-	
+	<div><input type="input" style = "width:200px;" class = "ui-corner-all" name="ReservePercent" id="ReservePercent" value="<?php echo $FloorInfo->ReservePercent; ?>"/></div>
+	<div>Reserve ( Value )</div>
+	<div><input type="input" style = "width:200px;" class = "ui-corner-all" name="ReserveValue" id="ReserveValue" value="<?php echo $FloorInfo->ReserveValue; ?>"/></div>
 	</div>
 	<div style = "width:70%;height:500px;float:left;overflow:auto;">
 	<div id = "imageResult">
-	
+	<?php 
+	if($FloorInfo->FloorID){
+		include_once('ShowImg.php');
+	}
+	?>
 	</div>
 	</div>
 	
@@ -211,3 +235,4 @@ textarea {
 		"font-size":"10px"
 	});
 </script>
+

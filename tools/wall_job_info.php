@@ -53,8 +53,8 @@ textarea {
 	
 	function save() {
 		//showLoadingPopup();
-		if(checkHeight()) {
-			$("#action").val("Save");
+		//if(checkHeight()) {
+			$("#action").val("Save1");
 			$.post("../ajax/wall_job.php",
 				$('#form').serialize()
 			, 
@@ -62,9 +62,9 @@ textarea {
 				//$("#result").html(data);
 				loadMenu('<?php echo $_SESSION["menu_code"]; ?>');
 			});
-		} else {
-			alert("All Slot Height not Equal Wall Height");
-		}
+		// } else {
+		// 	alert("All Slot Height not Equal Wall Height");
+		// }
 	}	
 	
 	function LoadNumwallInfo( NumWall ) {
@@ -120,8 +120,9 @@ textarea {
 	<div id = "result"></div>
 	<form id = "form">
 	<input type = "hidden" id = "action" name = "action" value = "getImageInfo" >
-	<input type = "hidden" id = "id" name = "id" value = "<?php echo $JobID; ?>" >	
-	<input type = "hidden" id = "JobType" name = "JobType" value = "2" >	
+	<input type = "hidden" id = "JobID" name = "JobID" value = "<?php echo $JobID; ?>" >	
+	<input type = "hidden" id = "JobType" name = "JobType" value = "5" >	
+	<input type = "hidden" id = "WallID" name = "WallID" value = "<?php echo $WallInfo->WallID; ?>" >
 	
 	<div style = "width:30%;height:auto;float:left;">
 	<div>Project</div>
@@ -145,20 +146,20 @@ textarea {
 	<div style = "border:solid;1px;padding:3px;margin:3px;">
 	<div>Height</div>
 	<div>
-	<input class = "wallHeight" type = "text" id = "Height" name = "Height" value = "<?php echo $JobInfo->WallJobList["Height"]; ?>"  style = "width:200px;" class = "ui-corner-all"  >	
+	<input class = "wallHeight" type = "text" id = "Height" name = "Height" value = "<?php echo $WallInfo->Height; //$JobInfo->WallJobList["Height"]; ?>"  style = "width:200px;" class = "ui-corner-all"  >	
 	</div>		
 			
 	<div>Width</div>
 	<div>
-	<input class = "wallWidth" type = "text" id = "Width" name = "Width" value = "<?php echo $JobInfo->WallJobList["Width"]; ?>"  style = "width:200px;" class = "ui-corner-all"  >	
+	<input class = "wallWidth" type = "text" id = "Width" name = "Width" value = "<?php echo $WallInfo->Width; //$JobInfo->WallJobList["Width"]; ?>"  style = "width:200px;" class = "ui-corner-all"  >	
 	</div>
 			
 	<div>Num Slot</div>
 	<div>
-	<input class = "numSlot" type = "text" id = "Slot" name = "Slot" value = "<?php echo $JobInfo->WallJobList["Slot"]; ?>"  style = "width:200px;" class = "ui-corner-all"  onchange = "loadSlotInfo( this.value );" >	
+	<input class = "numSlot" type = "text" id = "Slot" name = "Slot" value = "<?php echo $WallInfo->Slot; //$JobInfo->WallJobList["Slot"]; ?>"  style = "width:200px;" class = "ui-corner-all"  onchange = "loadSlotInfo( this.value );" >	
 	</div>	
 		
-	<div id = "SlotInfo">
+	<!--<div id = "SlotInfo">
 	<?php
 		$MaterialArray = $Loader->loadAllProjectMaterial($JobInfo->ProjectID );
 		$MaterialType = "Finish";
@@ -208,7 +209,7 @@ textarea {
 	?>	
 	</div>
 	</div>
-	
+	-->
 	
 	
 	<div class = "buttonMenu">
