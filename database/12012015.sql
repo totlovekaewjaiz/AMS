@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 12, 2015 at 05:15 PM
+-- Generation Time: Jan 12, 2015 at 05:32 PM
 -- Server version: 5.5.38
 -- PHP Version: 5.6.2
 
@@ -234,7 +234,7 @@ CREATE TABLE `material` (
   `UpdatedBy` varchar(100) NOT NULL,
   `UpdatedDate` datetime NOT NULL,
   `Status` enum('Y','N') NOT NULL DEFAULT 'Y'
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `material`
@@ -249,7 +249,28 @@ INSERT INTO `material` (`id`, `MaterialCode`, `MaterialName`, `MaterialWidth`, `
 (7, 'G-5', 'Glass', '1200', '2400', 0, 0, 'Administrator', '2014-03-31 11:22:17', 'Administrator', '2014-07-07 09:33:58', 'Y'),
 (8, '1005', 'ฝ้ามาตรฐาน', '100', '100', 0, 5, 'Administrator', '2014-04-09 01:54:32', 'Administrator', '2014-07-07 05:32:49', 'N'),
 (9, '1006', 'Demoe06', '100', '100', 0, 0, 'Administrator', '2014-07-07 05:32:58', 'Administrator', '2014-07-07 05:32:58', 'N'),
-(12, '1111', '1111', '11', '11', 2, 111, 'Administrator', '2014-11-26 21:16:32', 'Administrator', '2014-11-26 21:16:37', 'Y');
+(12, '1111', '1111', '11', '11', 2, 111, 'Administrator', '2014-11-26 21:16:32', 'Administrator', '2014-11-26 21:16:37', 'Y'),
+(13, '', 'ไม้โครงทุเรียนจ๊อยส์ 1"x2"x2.50ม.', '', '', 0, 27.5, '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 'Y'),
+(14, '', 'ไม้โครงทุเรียนจ๊อยส์ 1"x2"x3.00ม.', '', '', 0, 37, '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 'Y'),
+(15, '', 'ไม้โครงสักจ้อยส์ 1"x2"x2.50ม.', '', '', 4, 48, 'Administrator', '2015-01-12 23:25:48', 'Administrator', '2015-01-12 23:25:48', 'Y'),
+(16, '', 'ไม้โครงสักจ้อยส์ 1"x2"x3.00ม.', '', '', 4, 58, 'Administrator', '2015-01-12 23:26:37', 'Administrator', '2015-01-12 23:26:37', 'Y'),
+(17, '', 'ไม้อัดยาง 4 มม. เกรดA', '', '', 4, 230, 'Administrator', '2015-01-12 23:26:51', 'Administrator', '2015-01-12 23:26:51', 'Y'),
+(18, '', 'ไม้อัดยาง 6 มม.เกรดA', '', '', 4, 250, 'Administrator', '2015-01-12 23:27:04', 'Administrator', '2015-01-12 23:27:04', 'Y'),
+(19, '', 'ไม้อัดยาง 10 มม.เกรดA', '', '', 4, 430, 'Administrator', '2015-01-12 23:27:18', 'Administrator', '2015-01-12 23:27:18', 'Y'),
+(20, '', 'ไม้อัดยาง 15 มม. เกรดA', '', '', 4, 630, 'Administrator', '2015-01-12 23:27:30', 'Administrator', '2015-01-12 23:27:30', 'Y'),
+(21, '', 'ไม้อัดยาง 20 มม.เกรดA', '', '', 4, 850, 'Administrator', '2015-01-12 23:27:46', 'Administrator', '2015-01-12 23:27:46', 'Y'),
+(22, '', 'ไม้อัดยาง 4 มม. มอก.', '', '', 4, 395, 'Administrator', '2015-01-12 23:27:58', 'Administrator', '2015-01-12 23:27:58', 'Y'),
+(23, '', 'ไม้อัดยาง 6 มม. มอก.', '', '', 4, 585, 'Administrator', '2015-01-12 23:28:08', 'Administrator', '2015-01-12 23:28:08', 'Y'),
+(24, '', 'ไม้อัดยาง 10 มม. มอก.', '', '', 4, 915, 'Administrator', '2015-01-12 23:28:21', 'Administrator', '2015-01-12 23:28:21', 'Y'),
+(25, '', 'ไม้อัดยาง 15 มม. มอก.', '', '', 4, 1290, 'Administrator', '2015-01-12 23:28:33', 'Administrator', '2015-01-12 23:28:33', 'Y'),
+(26, '', 'ไม้อัดยาง 20 มม. มอก.', '', '', 4, 1730, 'Administrator', '2015-01-12 23:28:57', 'Administrator', '2015-01-12 23:28:57', 'Y'),
+(27, '', 'MDF 4 มม. 4''x8'' E-1', '', '', 4, 155, 'Administrator', '2015-01-12 23:30:06', 'Administrator', '2015-01-12 23:30:06', 'Y'),
+(28, '', 'MDF 6 มม. 4''x8'' E-1', '', '', 4, 185, 'Administrator', '2015-01-12 23:30:17', 'Administrator', '2015-01-12 23:30:17', 'Y'),
+(29, '', 'MDF 9 มม. 4''x8'' E-1', '', '', 4, 255, 'Administrator', '2015-01-12 23:30:27', 'Administrator', '2015-01-12 23:30:27', 'Y'),
+(30, '', 'MDF 12 มม. 4''x8'' E-1', '', '', 4, 350, 'Administrator', '2015-01-12 23:30:40', 'Administrator', '2015-01-12 23:30:40', 'Y'),
+(31, '', 'MDF 16 มม. 4''x8'' E-1', '', '', 4, 455, 'Administrator', '2015-01-12 23:30:53', 'Administrator', '2015-01-12 23:30:53', 'Y'),
+(32, '', 'MDF 19 มม. 4''x8'' E-1', '', '', 4, 530, 'Administrator', '2015-01-12 23:31:08', 'Administrator', '2015-01-12 23:31:08', 'Y'),
+(33, '', 'MDF9mm.เคลือบดำผิวส้ม1ด้าน', '', '', 4, 510, 'Administrator', '2015-01-12 23:31:23', 'Administrator', '2015-01-12 23:31:23', 'Y');
 
 -- --------------------------------------------------------
 
@@ -260,7 +281,7 @@ INSERT INTO `material` (`id`, `MaterialCode`, `MaterialName`, `MaterialWidth`, `
 CREATE TABLE `material_type` (
 `type_id` int(11) NOT NULL,
   `type_name` varchar(200) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `material_type`
@@ -269,7 +290,8 @@ CREATE TABLE `material_type` (
 INSERT INTO `material_type` (`type_id`, `type_name`) VALUES
 (1, 'กระเบื้อง'),
 (2, 'wallpaper'),
-(3, 'ปูพื้น\r\n');
+(3, 'ปูพื้น\r\n'),
+(4, 'ไม้\r\n');
 
 -- --------------------------------------------------------
 
@@ -605,12 +627,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=83;
 -- AUTO_INCREMENT for table `material`
 --
 ALTER TABLE `material`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `material_type`
 --
 ALTER TABLE `material_type`
-MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `menu`
 --
